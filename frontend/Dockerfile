@@ -8,11 +8,11 @@ ENV NODE_ENV=development
 WORKDIR /app
 
 # Install dependencies
-COPY ./frontend/package*.json ./
+COPY package*.json ./
 RUN npm ci
 
 # Copy project
-COPY ./frontend/ .
+COPY . .
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs

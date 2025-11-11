@@ -4,7 +4,8 @@ Payment endpoints with Stripe integration
 
 import stripe
 from typing import Any, Dict
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Body, Depends, HTTPException, Request
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from app.core.auth import get_current_active_user
@@ -17,17 +18,21 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 router = APIRouter()
 
+class PaymentIntentRequest(BaseModel):
+    """Payment intent request schema"""
+    amount: float
+    currency: str = "usd"
+
 @router.post("/create-payment-intent")
 def create_payment_intent(
     *,
-    request: Request,
+    payment_data: PaymentIntentRequest = Body(...),
     current_user: User = Depends(get_current_active_user),
 ) -> Dict[str, Any]:
     """Create Stripe payment intent"""
     try:
-        data = await request.json()
-        amount = data.get("amount", 0)
-        currency = data.get("currency", "usd")
+        amount = payment_data.amount
+        currency = payment_data.currency
 
         if amount <= 0:
             raise HTTPException(status_code=400, detail="Invalid amount")

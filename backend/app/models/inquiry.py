@@ -4,7 +4,8 @@ Inquiry model for contact form submissions
 
 from enum import Enum
 from typing import Optional
-from sqlalchemy import Column, ForeignKey, String, Text
+from sqlalchemy import Column, ForeignKey, Integer, String, Text
+from sqlalchemy.orm import relationship
 
 from app.models.base import BaseModel
 

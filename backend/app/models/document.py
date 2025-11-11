@@ -4,6 +4,7 @@ Document model for file uploads
 
 from typing import Optional
 from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
 
 from app.models.base import BaseModel
 
