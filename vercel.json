@@ -1,14 +1,13 @@
 {
   "version": 2,
-  "rootDirectory": "frontend",
   "builds": [
     {
-      "src": "package.json",
+      "src": "frontend/package.json",
       "use": "@vercel/next"
     }
   ],
   "functions": {
-    "src/pages/**/*.js": {
+    "frontend/src/pages/**/*.js": {
       "maxDuration": 30
     }
   },
