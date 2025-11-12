@@ -16,7 +16,7 @@ import {
   Eye
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-import { projectsApi } from '@/lib/api';
+import { projectsApi } from '@/lib';
 import { Project } from '@/types';
 import toast from 'react-hot-toast';
 

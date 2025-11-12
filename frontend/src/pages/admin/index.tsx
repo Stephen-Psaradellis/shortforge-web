@@ -17,7 +17,7 @@ import {
   XCircle
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-import { projectsApi, inquiriesApi } from '@/lib/api';
+import { projectsApi, inquiriesApi } from '@/lib';
 import { Project, Inquiry } from '@/types';
 import toast from 'react-hot-toast';
 

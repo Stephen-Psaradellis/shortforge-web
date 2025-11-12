@@ -14,7 +14,7 @@ import {
   CheckCircle,
   AlertCircle
 } from 'lucide-react';
-import { inquiriesApi } from '@/lib/api';
+import { inquiriesApi } from '@/lib';
 import toast from 'react-hot-toast';
 import { ContactForm as ContactFormType } from '@/types';
 
