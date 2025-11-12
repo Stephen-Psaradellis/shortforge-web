@@ -2,6 +2,7 @@
 Application configuration settings
 """
 
+import os
 import secrets
 from typing import List, Optional, Union
 from pydantic import AnyHttpUrl, field_validator, ValidationInfo
@@ -41,10 +42,10 @@ class Settings(BaseSettings):
         raise ValueError(v)
 
     # Database
-    POSTGRES_SERVER: str = "localhost"
-    POSTGRES_USER: str = "shortforge"
-    POSTGRES_PASSWORD: str = "password"
-    POSTGRES_DB: str = "shortforge"
+    POSTGRES_SERVER: str = "postgres.railway.internal"
+    POSTGRES_USER: str = "postgres"
+    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
+    POSTGRES_DB: str = "railway"
     POSTGRES_PORT: str = "5432"
     DATABASE_URL: Optional[str] = None
 
