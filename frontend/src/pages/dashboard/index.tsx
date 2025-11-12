@@ -59,11 +59,11 @@ export default function Dashboard() {
 
       // Calculate stats
       const totalProjects = projectData.length;
-      const activeProjects = projectData.filter(p =>
+      const activeProjects = projectData.filter((p: Project) =>
         ['planning', 'in_progress'].includes(p.status)
       ).length;
-      const completedProjects = projectData.filter(p => p.status === 'completed').length;
-      const totalUpdates = projectData.reduce((sum, p) => sum + p.updates.length, 0);
+      const completedProjects = projectData.filter((p: Project) => p.status === 'completed').length;
+      const totalUpdates = projectData.reduce((sum: number, p: Project) => sum + p.updates.length, 0);
 
       setStats({
         totalProjects,

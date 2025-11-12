@@ -67,11 +67,11 @@ export default function AdminDashboard() {
 
       // Calculate stats
       const totalProjects = projectData.length;
-      const activeProjects = projectData.filter(p =>
+      const activeProjects = projectData.filter((p: Project) =>
         ['planning', 'in_progress'].includes(p.status)
       ).length;
       const totalInquiries = inquiryData.length;
-      const newInquiries = inquiryData.filter(i => i.status === 'new').length;
+      const newInquiries = inquiryData.filter((i: Inquiry) => i.status === 'new').length;
 
       setStats({
         totalProjects,
@@ -86,7 +86,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const updateInquiryStatus = async (inquiryId: number, status: string) => {
+  const updateInquiryStatus = async (inquiryId: number, status: Inquiry['status']) => {
     try {
       await inquiriesApi.update(inquiryId, { status });
       setInquiries(inquiries.map(iq =>
@@ -228,7 +228,7 @@ export default function AdminDashboard() {
                         </span>
                         <select
                           value={inquiry.status}
-                          onChange={(e) => updateInquiryStatus(inquiry.id, e.target.value)}
+                          onChange={(e) => updateInquiryStatus(inquiry.id, e.target.value as Inquiry['status'])}
                           className="bg-secondary-700 border border-secondary-600 rounded px-2 py-1 text-xs"
                         >
                           <option value="new">New</option>

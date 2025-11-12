@@ -30,7 +30,12 @@ const services = [
       professional: '$7,999',
       enterprise: 'Custom'
     },
-    icon: Bot
+    icon: Bot,
+    ctaText: 'Get Started',
+    onCtaClick: () => {
+      // Scroll to contact section
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
   },
   {
     title: 'Automation Systems',
@@ -47,7 +52,12 @@ const services = [
       professional: '$4,999',
       enterprise: 'Custom'
     },
-    icon: Zap
+    icon: Zap,
+    ctaText: 'Learn More',
+    onCtaClick: () => {
+      // Scroll to services section
+      document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' });
+    }
   },
   {
     title: 'IT Consulting',
@@ -64,7 +74,12 @@ const services = [
       professional: '$2,999',
       enterprise: 'Custom'
     },
-    icon: Server
+    icon: Server,
+    ctaText: 'Contact Us',
+    onCtaClick: () => {
+      // Scroll to contact section
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 ];
 

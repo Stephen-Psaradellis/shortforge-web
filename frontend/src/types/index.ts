@@ -1,3 +1,5 @@
+import React from 'react';
+
 // User types
 export interface User {
   id: number;
@@ -106,13 +108,14 @@ export interface ServiceCardProps {
   title: string;
   description: string;
   features: string[];
-  pricing?: {
+  pricing: {
     starter: string;
     professional: string;
     enterprise: string;
   };
   ctaText: string;
   onCtaClick: () => void;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 export interface TestimonialProps {
