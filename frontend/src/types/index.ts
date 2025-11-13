@@ -125,3 +125,66 @@ export interface TestimonialProps {
   content: string;
   avatar?: string;
 }
+
+// Agent page types
+export interface BusinessIntelligence {
+  domain_id: string;
+  company_name?: string;
+  industry?: string;
+  description?: string;
+  website?: string;
+  location?: string;
+  employee_count?: number;
+  revenue_range?: string;
+  key_products?: string[];
+  target_audience?: string;
+  competitors?: string[];
+  pain_points?: string[];
+  goals?: string[];
+  budget_range?: string;
+  timeline?: string;
+  decision_makers?: Array<{
+    name?: string;
+    role?: string;
+    contact?: string;
+  }>;
+  recent_news?: Array<{
+    title: string;
+    date: string;
+    summary: string;
+  }>;
+  social_media?: {
+    linkedin?: string;
+    twitter?: string;
+    facebook?: string;
+  };
+  [key: string]: any; // Allow for flexible additional fields
+}
+
+export interface AgentMetadata {
+  agent_id: string;
+  name: string;
+  description: string;
+  capabilities: string[];
+  voice_enabled: boolean;
+  elevenlabs_agent_id?: string;
+  elevenlabs_api_key?: string;
+}
+
+export interface MarketingPitch {
+  headline: string;
+  subheadline: string;
+  key_benefits: string[];
+  call_to_action: string;
+  personalized_insights: string[];
+  social_proof?: string;
+}
+
+export interface AgentPageProps {
+  domainId: string;
+  agentId?: string;
+  businessIntelligence: BusinessIntelligence | null;
+  agentMetadata: AgentMetadata | null;
+  marketingPitch: MarketingPitch | null;
+  error?: string;
+}
