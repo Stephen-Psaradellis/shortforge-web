@@ -55,7 +55,9 @@ const AgentPage: NextPage<AgentPageProps> = ({
 
   // Load ElevenLabs widget script for agent pages
   useEffect(() => {
+    console.log('Agent page: agentMetadata.elevenlabs_agent_id =', agentMetadata?.elevenlabs_agent_id);
     if (!elevenLabsLoaded.current && agentMetadata?.elevenlabs_agent_id) {
+      console.log('Agent page: Loading ElevenLabs script');
       const script = document.createElement('script');
       script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
       script.async = true;
@@ -338,9 +340,11 @@ const AgentPage: NextPage<AgentPageProps> = ({
       </Layout>
 
       {/* ElevenLabs Voice Widget */}
-      {agentMetadata?.elevenlabs_agent_id && (
-        <elevenlabs-convai agent-id={agentMetadata.elevenlabs_agent_id}></elevenlabs-convai>
-      )}
+      {(() => {
+        const shouldRender = agentMetadata?.elevenlabs_agent_id;
+        console.log('Agent page: should render ElevenLabs widget =', shouldRender, 'agent-id =', agentMetadata?.elevenlabs_agent_id);
+        return shouldRender ? <elevenlabs-convai agent-id={agentMetadata.elevenlabs_agent_id}></elevenlabs-convai> : null;
+      })()}
     </>
   );
 };

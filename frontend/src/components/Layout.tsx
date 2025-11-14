@@ -67,6 +67,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     router.pathname === '/'
   );
 
+  // Debug logging
+  console.log('Layout: pathname =', router.pathname, 'shouldShowElevenLabsWidget =', shouldShowElevenLabsWidget);
+
   // Load ElevenLabs script only once when widget is needed
   useEffect(() => {
     if (shouldShowElevenLabsWidget && !elevenLabsLoaded.current) {
