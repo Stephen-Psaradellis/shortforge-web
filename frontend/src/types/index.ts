@@ -157,6 +157,7 @@ export interface BusinessIntelligence {
     linkedin?: string;
     twitter?: string;
     facebook?: string;
+    website?: string;
   };
   [key: string]: any; // Allow for flexible additional fields
 }

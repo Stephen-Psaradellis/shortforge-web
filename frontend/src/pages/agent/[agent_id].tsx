@@ -67,40 +67,36 @@ const AgentPage: NextPage<AgentPageProps> = ({
   // Error state handling
   if (error) {
     return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center bg-secondary-50">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-md mx-auto p-8"
+      <div className="min-h-screen flex items-center justify-center bg-secondary-50">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center max-w-md mx-auto p-8"
+        >
+          <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-secondary-900 mb-4">Something went wrong</h1>
+          <p className="text-secondary-600 mb-6">{error}</p>
+          <button
+            onClick={() => router.back()}
+            className="bg-primary-600 hover:bg-primary-500 text-white px-6 py-3 rounded-lg transition-colors"
           >
-            <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-secondary-900 mb-4">Something went wrong</h1>
-            <p className="text-secondary-600 mb-6">{error}</p>
-            <button
-              onClick={() => router.back()}
-              className="bg-primary-600 hover:bg-primary-500 text-white px-6 py-3 rounded-lg transition-colors"
-            >
-              Go Back
-            </button>
-          </motion.div>
-        </div>
-      </Layout>
+            Go Back
+          </button>
+        </motion.div>
+      </div>
     );
   }
 
   // Loading state
   if (isLoading || router.isFallback) {
     return (
-      <Layout>
-        <div className="min-h-screen flex items-center justify-center bg-secondary-50">
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-            className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full"
-          />
-        </div>
-      </Layout>
+      <div className="min-h-screen flex items-center justify-center bg-secondary-50">
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-primary-200 border-t-primary-600 rounded-full"
+        />
+      </div>
     );
   }
 
