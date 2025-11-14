@@ -49,11 +49,7 @@ const AgentPage: NextPage<AgentPageProps> = ({
 
   // Handle loading state for client-side navigation
   useEffect(() => {
-    if (router.isFallback) {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
+    setIsLoading(router.isFallback);
   }, [router.isFallback]);
 
   // Error state handling

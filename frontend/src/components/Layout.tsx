@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -47,14 +47,31 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, logout, isAuthenticated } = useAuth();
   const router = useRouter();
+  const elevenLabsLoaded = useRef(false);
+  const [elevenLabsAgentId, setElevenLabsAgentId] = useState('agent_2001k9djx4q6fx9vcwp2dcpydvd8');
 
-  // Determine ElevenLabs agent ID based on current route
-  const getElevenLabsAgentId = () => {
-    if (router.pathname.startsWith('/agent/') && router.query.agent_id) {
-      return router.query.agent_id as string;
+  // Update ElevenLabs agent ID after router is ready to prevent hydration mismatch
+  useEffect(() => {
+    if (router.isReady) {
+      if (router.pathname.startsWith('/agent/') && router.query.agent_id) {
+        setElevenLabsAgentId(router.query.agent_id as string);
+      } else {
+        setElevenLabsAgentId('agent_2001k9djx4q6fx9vcwp2dcpydvd8');
+      }
     }
-    return 'agent_2001k9djx4q6fx9vcwp2dcpydvd8'; // Default agent ID
-  };
+  }, [router.isReady, router.pathname, router.query.agent_id]);
+
+  // Load ElevenLabs script only once
+  useEffect(() => {
+    if (!elevenLabsLoaded.current) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+      script.async = true;
+      script.type = 'text/javascript';
+      document.head.appendChild(script);
+      elevenLabsLoaded.current = true;
+    }
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -211,8 +228,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </main>
 
       {/* ElevenLabs Voice Widget */}
-      <elevenlabs-convai agent-id={getElevenLabsAgentId()}></elevenlabs-convai>
-      <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+      <elevenlabs-convai agent-id={elevenLabsAgentId}></elevenlabs-convai>
 
       {/* Footer */}
       <footer className="bg-secondary-900 border-t border-secondary-800 mt-20">
