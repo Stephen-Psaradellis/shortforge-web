@@ -363,6 +363,7 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
     let businessIntelligence: BusinessIntelligence | null = null;
     try {
       businessIntelligence = await getBusinessIntelligence(domain_id);
+      console.log('Business intelligence data:', businessIntelligence);
     } catch (dbError) {
       console.error('Database error:', dbError);
       // Continue with null businessIntelligence - page will handle gracefully
@@ -389,11 +390,15 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
     let marketingPitch: MarketingPitch | null = null;
     if (businessIntelligence) {
       try {
+        console.log('Generating marketing pitch for business intelligence:', businessIntelligence.company_name || 'Unknown Company');
         marketingPitch = await generateMarketingPitch(businessIntelligence, agentMetadata.name);
+        console.log('Generated marketing pitch:', marketingPitch);
       } catch (pitchError) {
         console.error('Pitch generation error:', pitchError);
         // Continue with null marketingPitch - page will handle gracefully
       }
+    } else {
+      console.log('No business intelligence data found, skipping pitch generation');
     }
 
     return {

@@ -157,6 +157,8 @@ railway connect
 alembic upgrade head
 ```
 
+**Important**: Business intelligence data is sourced directly from SupaGent. The frontend calls SupaGent's API endpoints to retrieve personalized business intelligence for agent conversations.
+
 ### 4. Stripe Webhooks (Optional)
 
 If using Stripe payments:
@@ -190,6 +192,8 @@ SUPABASE_KEY=...
 ### Vercel (Frontend):
 ```env
 NEXT_PUBLIC_API_URL=https://your-backend-url
+NEXT_PUBLIC_SUPAGENT_URL=https://your-supagent-url
+NEXT_PUBLIC_SUPAGENT_API_KEY=your-supagent-api-key
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
 NEXT_PUBLIC_ELEVENLABS_AGENT_ID=...
 ```
