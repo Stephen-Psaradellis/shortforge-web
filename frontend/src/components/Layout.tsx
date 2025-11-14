@@ -61,9 +61,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
   }, [router.isReady, router.pathname, router.query.agent_id]);
 
-  // Load ElevenLabs script only once
+  // Determine if we should show the ElevenLabs widget
+  const shouldShowElevenLabsWidget = router.pathname.startsWith('/agent/') ||
+    router.pathname === '/contact' ||
+    router.pathname === '/';
+
+  // Load ElevenLabs script only once when widget is needed
   useEffect(() => {
-    if (!elevenLabsLoaded.current) {
+    if (shouldShowElevenLabsWidget && !elevenLabsLoaded.current) {
       const script = document.createElement('script');
       script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
       script.async = true;
@@ -71,7 +76,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       document.head.appendChild(script);
       elevenLabsLoaded.current = true;
     }
-  }, []);
+  }, [shouldShowElevenLabsWidget]);
 
   const handleLogout = async () => {
     try {
@@ -227,8 +232,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {children}
       </main>
 
-      {/* ElevenLabs Voice Widget */}
-      <elevenlabs-convai agent-id={elevenLabsAgentId}></elevenlabs-convai>
+      {/* ElevenLabs Voice Widget - conditionally rendered */}
+      {shouldShowElevenLabsWidget && (
+        <elevenlabs-convai key={elevenLabsAgentId} agent-id={elevenLabsAgentId}></elevenlabs-convai>
+      )}
 
       {/* Footer */}
       <footer className="bg-secondary-900 border-t border-secondary-800 mt-20">
