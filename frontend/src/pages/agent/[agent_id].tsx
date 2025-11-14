@@ -387,7 +387,7 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
         'Technical implementation'
       ],
       voice_enabled: true,
-      elevenlabs_agent_id: process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID,
+      elevenlabs_agent_id: agent_id, // Use the agent_id from route params for ElevenLabs
       elevenlabs_api_key: process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY,
     };
 

@@ -16,8 +16,21 @@ import {
   UserCircle
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-import VoiceWidget from '@/components/VoiceWidget';
 import toast from 'react-hot-toast';
+
+// Type declaration for ElevenLabs Convai widget
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'elevenlabs-convai': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement>,
+        HTMLElement
+      > & {
+        'agent-id'?: string;
+      };
+    }
+  }
+}
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -189,8 +202,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         {children}
       </main>
 
-      {/* Voice Widget */}
-      <VoiceWidget />
+      {/* ElevenLabs Voice Widget */}
+      <elevenlabs-convai agent-id="agent_2001k9djx4q6fx9vcwp2dcpydvd8"></elevenlabs-convai>
+      <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
       {/* Footer */}
       <footer className="bg-secondary-900 border-t border-secondary-800 mt-20">
