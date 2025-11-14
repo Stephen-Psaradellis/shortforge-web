@@ -13,7 +13,6 @@ import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { MessageCircle, TrendingUp, Users, Target, ArrowRight, AlertCircle } from 'lucide-react';
 
-import Layout from '../../components/Layout';
 import { AgentPageProps, BusinessIntelligence, AgentMetadata, MarketingPitch } from '../../types';
 import { getBusinessIntelligence } from '../../lib/database';
 import { generateMarketingPitch } from '../../lib/pitch';
@@ -115,8 +114,6 @@ const AgentPage: NextPage<AgentPageProps> = ({
         />
         <meta name="robots" content="noindex, nofollow" /> {/* Prevent indexing of dynamic agent pages */}
       </Head>
-
-      <Layout>
         {/* Hero Section */}
         <section className="relative min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 overflow-hidden">
           {/* Background Pattern */}
@@ -335,8 +332,6 @@ const AgentPage: NextPage<AgentPageProps> = ({
           </section>
         )}
 
-      </Layout>
-
       {/* ElevenLabs Voice Widget */}
       {agentMetadata?.elevenlabs_agent_id && (
         <elevenlabs-convai agent-id={agentMetadata.elevenlabs_agent_id}></elevenlabs-convai>
@@ -387,8 +382,41 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
       businessIntelligence = await getBusinessIntelligence(actualDomain);
       console.log('Business intelligence data:', businessIntelligence);
     } catch (dbError) {
-      console.error('Database error:', dbError);
-      // Continue with null businessIntelligence - page will handle gracefully
+      console.error('SupaGent API error:', dbError);
+      // Fallback to mock data for domain '1' (ShortForge)
+      if (actualDomain === '1') {
+        businessIntelligence = {
+          domain_id: '1',
+          domain: 'shortforge.dev',
+          company_name: 'ShortForge',
+          industry: 'AI & Automation Consultancy',
+          description: 'Empowering businesses with AI, automation, and innovative IT solutions. Building the future of intelligent systems through cutting-edge technology and strategic consulting.',
+          website: 'https://shortforge.dev',
+          location: 'Remote / Global',
+          employee_count: 10,
+          revenue_range: '$100K - $500K',
+          key_products: ['AI Agent Development', 'Business Process Automation', 'IT Consulting', 'Voice-Enabled Solutions'],
+          target_audience: 'Mid-size businesses seeking digital transformation',
+          competitors: ['Traditional IT consultancies', 'Generic AI platforms'],
+          pain_points: ['Slow digital transformation', 'High IT costs', 'Lack of AI expertise', 'Inefficient processes'],
+          goals: ['Accelerate client digital transformation', 'Become leading AI consultancy', 'Expand global reach', 'Innovate with cutting-edge AI solutions'],
+          budget_range: '$50K - $250K',
+          timeline: '3-6 months',
+          decision_makers: [
+            { name: 'Stephen Psaradellis', role: 'Founder & CEO' },
+            { name: 'AI Development Team', role: 'Technical Leadership' }
+          ],
+          recent_news: [
+            { title: 'ShortForge Launches Revolutionary AI Agent Platform', date: '2024-11-15', summary: 'New platform enables businesses to deploy custom AI agents in minutes' }
+          ],
+          social_media: {
+            linkedin: 'https://linkedin.com/company/shortforge',
+            twitter: 'https://twitter.com/shortforge',
+            website: 'https://shortforge.dev'
+          }
+        };
+        console.log('Using fallback mock data for ShortForge');
+      }
     }
 
     // Agent metadata based on agent_id
