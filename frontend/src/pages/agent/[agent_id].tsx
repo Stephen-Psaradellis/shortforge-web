@@ -8,7 +8,7 @@
 
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { MessageCircle, TrendingUp, Users, Target, ArrowRight, AlertCircle } from 'lucide-react';
@@ -46,11 +46,24 @@ const AgentPage: NextPage<AgentPageProps> = ({
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const elevenLabsLoaded = useRef(false);
 
   // Handle loading state for client-side navigation
   useEffect(() => {
     setIsLoading(router.isFallback);
   }, [router.isFallback]);
+
+  // Load ElevenLabs widget script for agent pages
+  useEffect(() => {
+    if (!elevenLabsLoaded.current && agentMetadata?.elevenlabs_agent_id) {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
+      script.async = true;
+      script.type = 'text/javascript';
+      document.head.appendChild(script);
+      elevenLabsLoaded.current = true;
+    }
+  }, [agentMetadata?.elevenlabs_agent_id]);
 
   // Error state handling
   if (error) {
@@ -323,6 +336,11 @@ const AgentPage: NextPage<AgentPageProps> = ({
         )}
 
       </Layout>
+
+      {/* ElevenLabs Voice Widget */}
+      {agentMetadata?.elevenlabs_agent_id && (
+        <elevenlabs-convai agent-id={agentMetadata.elevenlabs_agent_id}></elevenlabs-convai>
+      )}
     </>
   );
 };
@@ -359,10 +377,14 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
       };
     }
 
-    // Fetch business intelligence from database using domain_id
+    // SupaGent API expects domain identifiers as strings (e.g., '1', '2')
+    // Keep domain_id as-is since SupaGent uses these as primary keys
+    const actualDomain = domain_id;
+
+    // Fetch business intelligence from SupaGent using domain_id
     let businessIntelligence: BusinessIntelligence | null = null;
     try {
-      businessIntelligence = await getBusinessIntelligence(domain_id);
+      businessIntelligence = await getBusinessIntelligence(actualDomain);
       console.log('Business intelligence data:', businessIntelligence);
     } catch (dbError) {
       console.error('Database error:', dbError);

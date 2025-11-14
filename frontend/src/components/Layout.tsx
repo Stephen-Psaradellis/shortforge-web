@@ -61,10 +61,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
   }, [router.isReady, router.pathname, router.query.agent_id]);
 
-  // Determine if we should show the ElevenLabs widget
-  const shouldShowElevenLabsWidget = router.pathname.startsWith('/agent/') ||
+  // Determine if we should show the ElevenLabs widget (exclude agent pages - they handle their own)
+  const shouldShowElevenLabsWidget = !router.pathname.startsWith('/agent/') && (
     router.pathname === '/contact' ||
-    router.pathname === '/';
+    router.pathname === '/'
+  );
 
   // Load ElevenLabs script only once when widget is needed
   useEffect(() => {
