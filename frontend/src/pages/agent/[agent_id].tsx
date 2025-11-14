@@ -326,8 +326,6 @@ const AgentPage: NextPage<AgentPageProps> = ({
           </section>
         )}
 
-        {/* Voice Widget Integration */}
-        <elevenlabs-convai agent-id={agentMetadata?.elevenlabs_agent_id}></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
       </Layout>
     </>
   );

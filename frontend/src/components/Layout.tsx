@@ -48,6 +48,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { user, logout, isAuthenticated } = useAuth();
   const router = useRouter();
 
+  // Determine ElevenLabs agent ID based on current route
+  const getElevenLabsAgentId = () => {
+    if (router.pathname.startsWith('/agent/') && router.query.agent_id) {
+      return router.query.agent_id as string;
+    }
+    return 'agent_2001k9djx4q6fx9vcwp2dcpydvd8'; // Default agent ID
+  };
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -203,7 +211,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </main>
 
       {/* ElevenLabs Voice Widget */}
-      <elevenlabs-convai agent-id="agent_2001k9djx4q6fx9vcwp2dcpydvd8"></elevenlabs-convai>
+      <elevenlabs-convai agent-id={getElevenLabsAgentId()}></elevenlabs-convai>
       <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
       {/* Footer */}
