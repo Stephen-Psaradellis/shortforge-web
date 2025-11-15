@@ -218,4 +218,12 @@ def business_intelligence_health() -> Any:
     """
     Health check for business intelligence service
     """
-    return {"status": "healthy", "service": "business-intelligence"}
+    pitch_available = pitch_service.is_available()
+    return {
+        "status": "healthy",
+        "service": "business-intelligence",
+        "pitch_generation": {
+            "available": pitch_available,
+            "status": "available" if pitch_available else "unavailable - missing OPENAI_API_KEY"
+        }
+    }

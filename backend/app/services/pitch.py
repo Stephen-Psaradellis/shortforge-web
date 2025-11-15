@@ -49,14 +49,33 @@ class PitchGenerationService:
 
     def __init__(self):
         self.client = None
-        self._initialize_client()
+        self._initialized = False
+        self._api_key_missing = False
 
     def _initialize_client(self):
-        """Initialize OpenAI client"""
+        """Initialize OpenAI client lazily"""
+        if self._initialized:
+            return
+
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
-            raise ValueError("OpenAI API key not configured. Set OPENAI_API_KEY environment variable.")
-        self.client = AsyncOpenAI(api_key=api_key)
+            # Don't raise an error - just mark as unavailable
+            self._api_key_missing = True
+            return
+
+        try:
+            self.client = AsyncOpenAI(api_key=api_key)
+            self._initialized = True
+            self._api_key_missing = False
+        except Exception as e:
+            # Log the error but don't crash the application
+            print(f"Warning: Failed to initialize OpenAI client: {e}")
+            self._api_key_missing = True
+
+    def is_available(self) -> bool:
+        """Check if the pitch generation service is available"""
+        self._initialize_client()
+        return not getattr(self, '_api_key_missing', True)
 
     async def generate_pitch(
         self,
@@ -80,6 +99,14 @@ class PitchGenerationService:
         Raises:
             Exception: If pitch generation fails
         """
+        # Initialize client if needed
+        self._initialize_client()
+
+        # Check if we can generate pitches
+        if getattr(self, '_api_key_missing', False):
+            # Fall back to static pitch generation
+            return self._generate_fallback_pitch(business_intelligence, agent_name)
+
         try:
             # Construct comprehensive business context for AI
             business_context = self._build_business_context(business_intelligence)
