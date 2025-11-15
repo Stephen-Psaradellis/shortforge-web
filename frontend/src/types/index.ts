@@ -188,4 +188,5 @@ export interface AgentPageProps {
   agentMetadata: AgentMetadata | null;
   marketingPitch: MarketingPitch | null;
   error?: string;
+  apiError?: boolean;
 }

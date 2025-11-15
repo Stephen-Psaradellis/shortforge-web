@@ -44,14 +44,18 @@ class Settings(BaseSettings):
     # Database
     POSTGRES_SERVER: str = "postgres.railway.internal"
     POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
+    POSTGRES_PASSWORD: Optional[str] = os.getenv("POSTGRES_PASSWORD")
     POSTGRES_DB: str = "railway"
     POSTGRES_PORT: str = "5432"
+    SUPAGENT_DATABASE_URL: Optional[str] = os.getenv("SUPAGENT_DATABASE_URL")
     DATABASE_URL: Optional[str] = None
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod
     def assemble_db_connection(cls, v: Optional[str], info: ValidationInfo) -> str:
+        # Use SUPAGENT_DATABASE_URL if available
+        if info.data.get('SUPAGENT_DATABASE_URL'):
+            return info.data.get('SUPAGENT_DATABASE_URL')
         if isinstance(v, str):
             return v
         return f"postgresql://{info.data.get('POSTGRES_USER')}:{info.data.get('POSTGRES_PASSWORD')}@{info.data.get('POSTGRES_SERVER')}:{info.data.get('POSTGRES_PORT')}/{info.data.get('POSTGRES_DB')}"

@@ -21,11 +21,11 @@ import { Project } from '@/types';
 import toast from 'react-hot-toast';
 
 const statusColors = {
-  planning: 'bg-yellow-500/20 text-yellow-400',
-  in_progress: 'bg-blue-500/20 text-blue-400',
-  on_hold: 'bg-orange-500/20 text-orange-400',
-  completed: 'bg-green-500/20 text-green-400',
-  cancelled: 'bg-red-500/20 text-red-400'
+  planning: 'badge-warning',
+  in_progress: 'bg-blue-700/20 text-blue-400 border border-blue-700/40',
+  on_hold: 'bg-orange-700/20 text-orange-400 border border-orange-700/40',
+  completed: 'badge-success',
+  cancelled: 'badge-danger'
 };
 
 const statusLabels = {
@@ -86,18 +86,18 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen py-8">
+      <div className="min-h-screen bg-forge-black py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse">
-            <div className="h-8 bg-secondary-700 rounded w-1/4 mb-8"></div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div className="h-10 bg-forge-slate rounded w-1/4 mb-10"></div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-24 bg-secondary-800 rounded-lg"></div>
+                <div key={i} className="h-28 bg-forge-slate rounded-xl"></div>
               ))}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="h-96 bg-secondary-800 rounded-lg"></div>
-              <div className="h-96 bg-secondary-800 rounded-lg"></div>
+              <div className="h-96 bg-forge-slate rounded-xl"></div>
+              <div className="h-96 bg-forge-slate rounded-xl"></div>
             </div>
           </div>
         </div>
@@ -106,14 +106,14 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen bg-forge-black py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">
-            Welcome back, {user?.full_name?.split(' ')[0]}!
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Welcome back, <span className="text-gradient-ember">{user?.full_name?.split(' ')[0]}</span>!
           </h1>
-          <p className="text-secondary-400">
+          <p className="text-secondary-100 text-lg">
             Here's an overview of your projects and recent activity.
           </p>
         </div>
@@ -123,45 +123,53 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8"
+          className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12"
         >
-          <div className="card">
+          <div className="card-interactive">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-secondary-400 text-sm">Total Projects</p>
-                <p className="text-2xl font-bold text-white">{stats.totalProjects}</p>
+                <p className="text-secondary-300 text-sm font-medium mb-2">Total Projects</p>
+                <p className="text-3xl font-bold text-white">{stats.totalProjects}</p>
               </div>
-              <BarChart3 size={24} className="text-primary-500" />
+              <div className="w-12 h-12 bg-gradient-to-br from-ember-700/20 to-ember-800/20 rounded-xl flex items-center justify-center border border-ember-700/30">
+                <BarChart3 size={26} className="text-ember-400" />
+              </div>
             </div>
           </div>
 
-          <div className="card">
+          <div className="card-interactive">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-secondary-400 text-sm">Active Projects</p>
-                <p className="text-2xl font-bold text-white">{stats.activeProjects}</p>
+                <p className="text-secondary-300 text-sm font-medium mb-2">Active Projects</p>
+                <p className="text-3xl font-bold text-white">{stats.activeProjects}</p>
               </div>
-              <Clock size={24} className="text-blue-500" />
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-700/20 to-blue-800/20 rounded-xl flex items-center justify-center border border-blue-700/30">
+                <Clock size={26} className="text-blue-400" />
+              </div>
             </div>
           </div>
 
-          <div className="card">
+          <div className="card-interactive">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-secondary-400 text-sm">Completed</p>
-                <p className="text-2xl font-bold text-white">{stats.completedProjects}</p>
+                <p className="text-secondary-300 text-sm font-medium mb-2">Completed</p>
+                <p className="text-3xl font-bold text-white">{stats.completedProjects}</p>
               </div>
-              <CheckCircle size={24} className="text-green-500" />
+              <div className="w-12 h-12 bg-gradient-to-br from-green-700/20 to-green-800/20 rounded-xl flex items-center justify-center border border-green-700/30">
+                <CheckCircle size={26} className="text-green-400" />
+              </div>
             </div>
           </div>
 
-          <div className="card">
+          <div className="card-interactive">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-secondary-400 text-sm">Updates</p>
-                <p className="text-2xl font-bold text-white">{stats.totalUpdates}</p>
+                <p className="text-secondary-300 text-sm font-medium mb-2">Updates</p>
+                <p className="text-3xl font-bold text-white">{stats.totalUpdates}</p>
               </div>
-              <MessageSquare size={24} className="text-purple-500" />
+              <div className="w-12 h-12 bg-gradient-to-br from-purple-700/20 to-purple-800/20 rounded-xl flex items-center justify-center border border-purple-700/30">
+                <MessageSquare size={26} className="text-purple-400" />
+              </div>
             </div>
           </div>
         </motion.div>
@@ -174,13 +182,13 @@ export default function Dashboard() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="card"
           >
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-white">Recent Projects</h2>
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl font-bold text-white">Recent Projects</h2>
               <Link
                 href="/dashboard/projects"
-                className="text-primary-400 hover:text-primary-300 text-sm font-medium"
+                className="text-ember-400 hover:text-ember-300 text-sm font-semibold transition-colors"
               >
-                View all
+                View all →
               </Link>
             </div>
 
@@ -279,32 +287,32 @@ export default function Dashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-8 card"
+          className="mt-12 card-glow"
         >
-          <h2 className="text-xl font-bold text-white mb-6">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <h2 className="text-2xl font-bold text-white mb-8">Quick Actions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Link
               href="/contact"
-              className="flex items-center justify-center space-x-3 p-4 bg-primary-600/20 hover:bg-primary-600/30 rounded-lg transition-colors border border-primary-600/30"
+              className="flex items-center justify-center space-x-3 p-6 bg-gradient-to-br from-ember-900/20 to-ember-800/20 hover:from-ember-900/30 hover:to-ember-800/30 rounded-xl transition-all duration-200 border border-ember-700/30 hover:border-ember-600/50 hover:shadow-glow-sm group"
             >
-              <Plus size={20} className="text-primary-400" />
-              <span className="text-white font-medium">New Project</span>
+              <Plus size={24} className="text-ember-400 group-hover:text-ember-300 transition-colors" />
+              <span className="text-white font-semibold text-lg">New Project</span>
             </Link>
 
             <Link
               href="/dashboard/documents"
-              className="flex items-center justify-center space-x-3 p-4 bg-secondary-700 hover:bg-secondary-600 rounded-lg transition-colors"
+              className="flex items-center justify-center space-x-3 p-6 bg-forge-slate hover:bg-forge-smoke rounded-xl transition-all duration-200 border border-forge-steel/30 hover:border-forge-steel/50 group"
             >
-              <FileText size={20} className="text-secondary-300" />
-              <span className="text-white font-medium">Documents</span>
+              <FileText size={24} className="text-secondary-300 group-hover:text-white transition-colors" />
+              <span className="text-white font-semibold text-lg">Documents</span>
             </Link>
 
             <Link
               href="/dashboard/billing"
-              className="flex items-center justify-center space-x-3 p-4 bg-secondary-700 hover:bg-secondary-600 rounded-lg transition-colors"
+              className="flex items-center justify-center space-x-3 p-6 bg-forge-slate hover:bg-forge-smoke rounded-xl transition-all duration-200 border border-forge-steel/30 hover:border-forge-steel/50 group"
             >
-              <TrendingUp size={20} className="text-secondary-300" />
-              <span className="text-white font-medium">Billing</span>
+              <TrendingUp size={24} className="text-secondary-300 group-hover:text-white transition-colors" />
+              <span className="text-white font-semibold text-lg">Billing</span>
             </Link>
           </div>
         </motion.div>

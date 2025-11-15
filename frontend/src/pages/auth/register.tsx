@@ -85,8 +85,8 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen bg-forge-black flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -94,15 +94,15 @@ export default function Register() {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <Link href="/" className="inline-flex items-center space-x-2 mb-8">
-            <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+          <Link href="/" className="inline-flex items-center space-x-3 mb-10 group">
+            <div className="w-12 h-12 bg-gradient-to-br from-ember-700 to-ember-800 rounded-lg flex items-center justify-center shadow-glow-sm group-hover:shadow-glow transition-all duration-300">
               <span className="text-white font-bold text-xl">SF</span>
             </div>
-            <span className="text-2xl font-bold text-white">ShortForge</span>
+            <span className="text-3xl font-bold text-white">ShortForge</span>
           </Link>
 
-          <h2 className="text-3xl font-bold text-white mb-2">Create Account</h2>
-          <p className="text-secondary-400">
+          <h2 className="text-4xl font-bold text-white mb-4">Create Account</h2>
+          <p className="text-secondary-200 text-lg">
             Join ShortForge and transform your business
           </p>
         </motion.div>
@@ -112,7 +112,7 @@ export default function Register() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="card"
+          className="card-glow"
         >
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
@@ -263,21 +263,21 @@ export default function Register() {
               )}
             </div>
 
-            <div className="flex items-center">
+            <div className="flex items-start">
               <input
                 id="terms"
                 name="terms"
                 type="checkbox"
                 required
-                className="h-4 w-4 text-primary-600 bg-secondary-800 border-secondary-700 rounded focus:ring-primary-500"
+                className="h-4 w-4 mt-1 text-ember-600 bg-forge-slate border-forge-steel/40 rounded focus:ring-ember-500 focus:ring-offset-forge-black cursor-pointer"
               />
-              <label htmlFor="terms" className="ml-2 block text-sm text-secondary-300">
+              <label htmlFor="terms" className="ml-3 block text-sm text-secondary-200 cursor-pointer">
                 I agree to the{' '}
-                <a href="#" className="text-primary-400 hover:text-primary-300">
+                <a href="#" className="text-ember-400 hover:text-ember-300 font-medium transition-colors">
                   Terms of Service
                 </a>{' '}
                 and{' '}
-                <a href="#" className="text-primary-400 hover:text-primary-300">
+                <a href="#" className="text-ember-400 hover:text-ember-300 font-medium transition-colors">
                   Privacy Policy
                 </a>
               </label>
@@ -310,9 +310,9 @@ export default function Register() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-center"
         >
-          <p className="text-secondary-400">
+          <p className="text-secondary-200">
             Already have an account?{' '}
-            <Link href="/auth/login" className="text-primary-400 hover:text-primary-300 font-medium">
+            <Link href="/auth/login" className="text-ember-400 hover:text-ember-300 font-semibold transition-colors">
               Sign in here
             </Link>
           </p>

@@ -189,25 +189,25 @@ const ServiceDetail: React.FC<{ service: typeof services[0] }> = ({ service }) =
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="mb-16"
+        className="mb-20"
       >
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-xl mb-6">
-            <Icon size={32} className="text-white" />
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-ember-700/20 to-ember-800/20 rounded-2xl mb-8 border border-ember-700/30 shadow-glow-sm">
+            <Icon size={40} className="text-ember-400" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">
             {service.title}
           </h2>
-          <p className="text-xl text-primary-400 font-medium mb-4">
-            {service.subtitle}
+          <p className="text-2xl font-semibold mb-6">
+            <span className="text-gradient-ember">{service.subtitle}</span>
           </p>
-          <p className="text-lg text-secondary-300 max-w-3xl mx-auto">
+          <p className="text-lg text-secondary-100 max-w-4xl mx-auto leading-relaxed">
             {service.description}
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {service.features.map((feature, index) => (
             <motion.div
               key={index}
@@ -215,35 +215,35 @@ const ServiceDetail: React.FC<{ service: typeof services[0] }> = ({ service }) =
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="card group hover:border-primary-600 transition-all duration-300"
+              className="card-interactive group"
             >
-              <div className="flex items-center space-x-3 mb-3">
-                <div className="w-10 h-10 bg-primary-600/20 rounded-lg flex items-center justify-center group-hover:bg-primary-600/30 transition-colors">
-                  <feature.icon size={20} className="text-primary-400" />
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-ember-700/20 to-ember-800/20 rounded-xl flex items-center justify-center border border-ember-700/30 group-hover:border-ember-600/50 group-hover:shadow-glow-sm transition-all duration-300">
+                  <feature.icon size={22} className="text-ember-400 group-hover:text-ember-300 transition-colors" />
                 </div>
-                <h3 className="text-lg font-semibold text-white">{feature.title}</h3>
+                <h3 className="text-lg font-bold text-white">{feature.title}</h3>
               </div>
-              <p className="text-secondary-300">{feature.description}</p>
+              <p className="text-secondary-200 leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </div>
 
         {/* Use Cases */}
-        <div className="card mb-16">
-          <h3 className="text-2xl font-bold text-white mb-6">Common Use Cases</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="card mb-20">
+          <h3 className="text-2xl font-bold text-white mb-8">Common Use Cases</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {service.useCases.map((useCase, index) => (
-              <div key={index} className="flex items-center space-x-3">
-                <CheckCircle size={20} className="text-primary-500 flex-shrink-0" />
-                <span className="text-secondary-300">{useCase}</span>
+              <div key={index} className="flex items-start space-x-3">
+                <CheckCircle size={20} className="text-ember-500 flex-shrink-0 mt-0.5 shadow-glow-sm" />
+                <span className="text-secondary-200 font-medium">{useCase}</span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Pricing */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-white text-center mb-12">Pricing Plans</h3>
+        <div className="mb-20">
+          <h3 className="text-4xl font-bold text-white text-center mb-16">Pricing Plans</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {Object.entries(service.pricing).map(([tier, details], index) => (
               <motion.div
@@ -252,19 +252,26 @@ const ServiceDetail: React.FC<{ service: typeof services[0] }> = ({ service }) =
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`card ${tier === 'professional' ? 'border-primary-600 bg-primary-600/5' : ''}`}
+                className={`card-interactive ${tier === 'professional' ? 'border-ember-600/50 shadow-glow' : ''}`}
               >
-                <div className="text-center mb-6">
-                  <h4 className="text-xl font-bold text-white capitalize mb-2">{tier}</h4>
-                  <div className="text-3xl font-bold text-primary-400 mb-1">{details.price}</div>
-                  {tier !== 'enterprise' && <div className="text-secondary-400">per month</div>}
+                {tier === 'professional' && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="px-4 py-1 bg-gradient-to-r from-ember-700 to-ember-600 text-white text-sm font-bold rounded-full shadow-glow">
+                      MOST POPULAR
+                    </span>
+                  </div>
+                )}
+                <div className="text-center mb-8">
+                  <h4 className="text-xl font-bold text-white capitalize mb-4">{tier}</h4>
+                  <div className="text-4xl font-bold text-ember-400 mb-2">{details.price}</div>
+                  {tier !== 'enterprise' && <div className="text-secondary-300 font-medium">per month</div>}
                 </div>
 
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-4 mb-10">
                   {details.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start space-x-3">
-                      <CheckCircle size={16} className="text-primary-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-secondary-300 text-sm">{feature}</span>
+                      <CheckCircle size={18} className="text-ember-500 flex-shrink-0 mt-0.5 shadow-glow-sm" />
+                      <span className="text-secondary-200 text-sm font-medium">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -272,9 +279,7 @@ const ServiceDetail: React.FC<{ service: typeof services[0] }> = ({ service }) =
                 <Link
                   href="/contact"
                   className={`btn-primary w-full text-center ${
-                    tier === 'professional'
-                      ? 'bg-primary-600 hover:bg-primary-500'
-                      : 'bg-secondary-700 hover:bg-secondary-600'
+                    tier === 'professional' ? '' : 'btn-secondary'
                   }`}
                 >
                   Get Started
@@ -291,19 +296,22 @@ const ServiceDetail: React.FC<{ service: typeof services[0] }> = ({ service }) =
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="card bg-gradient-to-r from-primary-900 to-primary-800 border-primary-600"
+            className="relative card-glow overflow-hidden"
           >
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Ready to Transform Your Business?
-            </h3>
-            <p className="text-primary-100 mb-6">
-              Let's discuss how {service.title} can help you achieve your goals.
-              Schedule a free consultation with our experts.
-            </p>
-            <Link href="/contact" className="btn-primary bg-white text-primary-900 hover:bg-primary-50">
-              Schedule Consultation
-              <ArrowRight size={20} className="ml-2 inline" />
-            </Link>
+            <div className="absolute inset-0 bg-gradient-to-br from-ember-900/20 to-ember-800/10 pointer-events-none"></div>
+            <div className="relative">
+              <h3 className="text-3xl font-bold text-white mb-5">
+                Ready to Transform Your Business?
+              </h3>
+              <p className="text-secondary-100 mb-8 text-lg max-w-2xl mx-auto leading-relaxed">
+                Let's discuss how {service.title} can help you achieve your goals.
+                Schedule a free consultation with our experts.
+              </p>
+              <Link href="/contact" className="btn-primary inline-flex items-center shadow-glow">
+                Schedule Consultation
+                <ArrowRight size={22} className="ml-3" />
+              </Link>
+            </div>
           </motion.div>
         </div>
       </motion.div>
@@ -313,25 +321,25 @@ const ServiceDetail: React.FC<{ service: typeof services[0] }> = ({ service }) =
 
 export default function Services() {
   return (
-    <div className="min-h-screen py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-forge-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-24"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Our Services
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-8">
+            Our <span className="text-gradient-ember">Services</span>
           </h1>
-          <p className="text-xl text-secondary-300 max-w-3xl mx-auto mb-8">
+          <p className="text-xl text-secondary-100 max-w-4xl mx-auto mb-10 leading-relaxed">
             Comprehensive AI, automation, and IT solutions designed to accelerate
             your digital transformation and drive sustainable business growth.
           </p>
-          <Link href="#ai-agents" className="btn-primary">
+          <Link href="#ai-agents" className="btn-primary shadow-glow inline-flex items-center">
             Explore Services
-            <ArrowRight size={20} className="ml-2 inline" />
+            <ArrowRight size={22} className="ml-3" />
           </Link>
         </motion.div>
 
@@ -340,13 +348,13 @@ export default function Services() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-16"
+          className="flex flex-wrap justify-center gap-4 mb-20"
         >
           {services.map((service) => (
             <a
               key={service.id}
               href={`#${service.id}`}
-              className="px-6 py-3 bg-secondary-800 hover:bg-secondary-700 text-secondary-300 hover:text-white rounded-lg transition-colors border border-secondary-700 hover:border-primary-600"
+              className="px-6 py-3 bg-forge-charcoal hover:bg-forge-smoke text-secondary-200 hover:text-white rounded-lg transition-all duration-200 border border-forge-steel/30 hover:border-ember-600/50 font-medium"
             >
               {service.title}
             </a>
@@ -364,23 +372,27 @@ export default function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center py-16"
+          className="text-center py-20"
         >
-          <div className="card bg-gradient-to-r from-primary-900 via-primary-800 to-accent-900 border-primary-600">
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Not Sure Which Service is Right for You?
-            </h2>
-            <p className="text-secondary-300 mb-8 max-w-2xl mx-auto">
-              Our team of experts will assess your needs and recommend the perfect solution
-              for your business. Get a free consultation and discover how we can help.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact" className="btn-primary">
-                Get Free Consultation
-              </Link>
-              <Link href="tel:+1234567890" className="btn-secondary">
-                Call Us: (123) 456-7890
-              </Link>
+          <div className="relative card-glow overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-ember-900/20 to-ember-800/10 pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-ember-700/10 blur-3xl rounded-full"></div>
+            <div className="relative">
+              <h2 className="text-4xl font-bold text-white mb-6">
+                Not Sure Which Service is <span className="text-gradient-ember">Right for You?</span>
+              </h2>
+              <p className="text-secondary-100 mb-10 max-w-3xl mx-auto text-lg leading-relaxed">
+                Our team of experts will assess your needs and recommend the perfect solution
+                for your business. Get a free consultation and discover how we can help.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-5 justify-center">
+                <Link href="/contact" className="btn-primary shadow-glow">
+                  Get Free Consultation
+                </Link>
+                <Link href="tel:+1234567890" className="btn-secondary">
+                  Call Us: (123) 456-7890
+                </Link>
+              </div>
             </div>
           </div>
         </motion.div>

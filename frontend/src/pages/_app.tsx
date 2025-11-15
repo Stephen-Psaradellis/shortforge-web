@@ -15,9 +15,49 @@ export default function App({ Component, pageProps }: AppProps) {
         toastOptions={{
           duration: 4000,
           style: {
-            background: '#1e293b',
-            color: '#f1f5f9',
-            border: '1px solid #334155',
+            background: '#141414',
+            color: '#ffffff',
+            border: '1px solid #333333',
+            borderRadius: '0.75rem',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2)',
+            padding: '16px',
+            fontSize: '0.875rem',
+            fontWeight: '500',
+          },
+          success: {
+            style: {
+              background: '#141414',
+              color: '#ffffff',
+              border: '1px solid #C50000',
+              boxShadow: '0 0 20px rgba(197, 0, 0, 0.3)',
+            },
+            iconTheme: {
+              primary: '#FF3B30',
+              secondary: '#ffffff',
+            },
+          },
+          error: {
+            style: {
+              background: '#141414',
+              color: '#ffffff',
+              border: '1px solid #9E0000',
+              boxShadow: '0 0 20px rgba(158, 0, 0, 0.4)',
+            },
+            iconTheme: {
+              primary: '#E6251A',
+              secondary: '#ffffff',
+            },
+          },
+          loading: {
+            style: {
+              background: '#141414',
+              color: '#ffffff',
+              border: '1px solid #333333',
+            },
+            iconTheme: {
+              primary: '#FF3B30',
+              secondary: '#141414',
+            },
           },
         }}
       />

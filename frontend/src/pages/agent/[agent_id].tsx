@@ -14,7 +14,7 @@ import { motion } from 'framer-motion';
 import { MessageCircle, TrendingUp, Users, Target, ArrowRight, AlertCircle } from 'lucide-react';
 
 import { AgentPageProps, BusinessIntelligence, AgentMetadata, MarketingPitch } from '../../types';
-import { getBusinessIntelligence } from '../../lib/database';
+import { businessIntelligenceApi } from '../../lib/api';
 import { generateMarketingPitch } from '../../lib/pitch';
 
 // Type declaration for ElevenLabs Convai widget
@@ -41,7 +41,8 @@ const AgentPage: NextPage<AgentPageProps> = ({
   businessIntelligence,
   agentMetadata,
   marketingPitch,
-  error
+  error,
+  apiError
 }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
@@ -102,6 +103,21 @@ const AgentPage: NextPage<AgentPageProps> = ({
 
   return (
     <>
+      {/* Development-only API error indicator */}
+      {process.env.NODE_ENV === 'development' && apiError && (
+        <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 text-sm">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <AlertCircle className="h-5 w-5 text-yellow-400" />
+            </div>
+            <div className="ml-3">
+              <p className="font-medium">API Error Detected</p>
+              <p>Business intelligence API failed. Showing fallback data for development.</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Head>
         <title>{marketingPitch?.headline || 'AI Agent Consultation'} | ShortForge</title>
         <meta
@@ -372,13 +388,22 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
     // Keep domain_id as-is since SupaGent uses these as primary keys
     const actualDomain = domain_id;
 
-    // Fetch business intelligence from SupaGent using domain_id
+    // Fetch business intelligence from backend API using domain_id
     let businessIntelligence: BusinessIntelligence | null = null;
+    let hasApiError = false;
+
     try {
-      businessIntelligence = await getBusinessIntelligence(actualDomain);
+      businessIntelligence = await businessIntelligenceApi.getByDomain(actualDomain);
       console.log('Business intelligence data:', businessIntelligence);
-    } catch (dbError) {
-      console.error('SupaGent API error:', dbError);
+    } catch (apiError: any) {
+      hasApiError = true;
+      console.error('Backend business intelligence API error:', apiError);
+
+      // For debugging/development, you might want to re-throw to see errors
+      // But for production, we gracefully fall back to mock data
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('API error occurred, falling back to mock data. In production, this would show fallback data.');
+      }
     }
 
     // Fallback to mock data for domain '1' (ShortForge) if no data available
@@ -430,7 +455,7 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
       ],
       voice_enabled: true,
       elevenlabs_agent_id: agent_id, // Use the agent_id from route params for ElevenLabs
-      elevenlabs_api_key: process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY || null,
+      elevenlabs_api_key: process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY || undefined,
     };
 
     // Generate marketing pitch if we have business intelligence
@@ -475,6 +500,7 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
         businessIntelligence,
         agentMetadata,
         marketingPitch,
+        apiError: hasApiError,
       },
     };
 

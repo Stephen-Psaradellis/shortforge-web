@@ -22,18 +22,18 @@ import { Project, Inquiry } from '@/types';
 import toast from 'react-hot-toast';
 
 const statusColors = {
-  new: 'bg-blue-500/20 text-blue-400',
-  in_progress: 'bg-yellow-500/20 text-yellow-400',
-  responded: 'bg-green-500/20 text-green-400',
-  closed: 'bg-gray-500/20 text-gray-400'
+  new: 'bg-blue-700/20 text-blue-400 border border-blue-700/40',
+  in_progress: 'badge-warning',
+  responded: 'badge-success',
+  closed: 'bg-gray-700/20 text-gray-400 border border-gray-700/40'
 };
 
 const projectStatusColors = {
-  planning: 'bg-yellow-500/20 text-yellow-400',
-  in_progress: 'bg-blue-500/20 text-blue-400',
-  on_hold: 'bg-orange-500/20 text-orange-400',
-  completed: 'bg-green-500/20 text-green-400',
-  cancelled: 'bg-red-500/20 text-red-400'
+  planning: 'badge-warning',
+  in_progress: 'bg-blue-700/20 text-blue-400 border border-blue-700/40',
+  on_hold: 'bg-orange-700/20 text-orange-400 border border-orange-700/40',
+  completed: 'badge-success',
+  cancelled: 'badge-danger'
 };
 
 export default function AdminDashboard() {
@@ -103,18 +103,18 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen py-8">
+      <div className="min-h-screen bg-forge-black py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-pulse">
-            <div className="h-8 bg-secondary-700 rounded w-1/4 mb-8"></div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div className="h-10 bg-forge-slate rounded w-1/4 mb-10"></div>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-24 bg-secondary-800 rounded-lg"></div>
+                <div key={i} className="h-28 bg-forge-slate rounded-xl"></div>
               ))}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <div className="h-96 bg-secondary-800 rounded-lg"></div>
-              <div className="h-96 bg-secondary-800 rounded-lg"></div>
+              <div className="h-96 bg-forge-slate rounded-xl"></div>
+              <div className="h-96 bg-forge-slate rounded-xl"></div>
             </div>
           </div>
         </div>
@@ -123,12 +123,14 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen bg-forge-black py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">Admin Dashboard</h1>
-          <p className="text-secondary-400">
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <span className="text-gradient-ember">Admin</span> Dashboard
+          </h1>
+          <p className="text-secondary-100 text-lg">
             Manage projects, inquiries, and monitor platform activity.
           </p>
         </div>

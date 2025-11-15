@@ -60,33 +60,34 @@ const contactInfo = [
 ];
 
 const ServiceInterest = ({ register, errors }: any) => (
-  <div className="space-y-3">
-    <label className="block text-sm font-medium text-secondary-300">
+  <div className="space-y-4">
+    <label className="label">
       Service Interest (Optional)
     </label>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
       {[
         { value: 'ai_agents', label: 'AI Agents' },
         { value: 'automation', label: 'Automation Systems' },
         { value: 'it_consulting', label: 'IT Consulting' }
       ].map((service) => (
-        <label key={service.value} className="relative">
+        <label key={service.value} className="relative cursor-pointer">
           <input
             type="radio"
             value={service.value}
             {...register('service_interest')}
             className="sr-only peer"
           />
-          <div className="card cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-600/10 hover:border-primary-600 transition-all duration-200">
-            <div className="text-center">
-              <div className="text-white font-medium">{service.label}</div>
-            </div>
+          <div className="bg-forge-slate border border-forge-steel/40 rounded-lg p-4 text-center peer-checked:border-ember-600/50 peer-checked:bg-ember-900/20 peer-checked:shadow-glow-sm hover:border-forge-steel/60 transition-all duration-200">
+            <div className="text-white font-semibold">{service.label}</div>
           </div>
         </label>
       ))}
     </div>
     {errors.service_interest && (
-      <p className="text-red-400 text-sm">{errors.service_interest.message}</p>
+      <p className="text-ember-400 text-sm flex items-center space-x-1">
+        <AlertCircle size={14} />
+        <span>{errors.service_interest.message}</span>
+      </p>
     )}
   </div>
 );
@@ -120,23 +121,23 @@ export default function Contact() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen py-24">
+      <div className="min-h-screen bg-forge-black flex items-center justify-center py-24">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-center"
+            className="text-center card-glow"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-green-600 rounded-full mb-6">
-              <CheckCircle size={32} className="text-white" />
+            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-600 to-green-700 rounded-full mb-8 shadow-glow">
+              <CheckCircle size={40} className="text-white" />
             </div>
-            <h1 className="text-3xl font-bold text-white mb-4">Message Sent!</h1>
-            <p className="text-secondary-300 mb-8">
+            <h1 className="text-4xl font-bold text-white mb-6">Message Sent!</h1>
+            <p className="text-secondary-100 mb-10 text-lg leading-relaxed">
               Thank you for reaching out. We've received your message and will get back to you within 24 hours.
             </p>
             <button
               onClick={() => setIsSubmitted(false)}
-              className="btn-primary"
+              className="btn-primary shadow-glow"
             >
               Send Another Message
             </button>
@@ -147,19 +148,19 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-forge-black">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Get In Touch
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-8">
+            Get In <span className="text-gradient-ember">Touch</span>
           </h1>
-          <p className="text-xl text-secondary-300 max-w-3xl mx-auto">
+          <p className="text-xl text-secondary-100 max-w-4xl mx-auto leading-relaxed">
             Ready to transform your business with AI and automation? Let's discuss how
             ShortForge can help you achieve your goals.
           </p>
@@ -173,8 +174,8 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Contact Information</h2>
-            <p className="text-secondary-300 mb-8">
+            <h2 className="text-3xl font-bold text-white mb-8">Contact Information</h2>
+            <p className="text-secondary-100 mb-10 leading-relaxed">
               Choose the method that works best for you. We're here to help and
               typically respond within 24 hours.
             </p>
@@ -187,45 +188,45 @@ export default function Contact() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex items-start space-x-4"
+                  className="flex items-start space-x-5 group"
                 >
-                  <div className="w-12 h-12 bg-primary-600/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <info.icon size={24} className="text-primary-400" />
+                  <div className="w-14 h-14 bg-gradient-to-br from-ember-700/20 to-ember-800/20 rounded-xl flex items-center justify-center flex-shrink-0 border border-ember-700/30 group-hover:border-ember-600/50 group-hover:shadow-glow-sm transition-all duration-300">
+                    <info.icon size={26} className="text-ember-400 group-hover:text-ember-300 transition-colors" />
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-1">
+                  <div className="pt-1">
+                    <h3 className="text-lg font-bold text-white mb-2">
                       {info.title}
                     </h3>
                     {info.href ? (
                       <a
                         href={info.href}
-                        className="text-primary-400 hover:text-primary-300 transition-colors block font-medium"
+                        className="text-ember-400 hover:text-ember-300 transition-colors block font-semibold mb-1"
                       >
                         {info.content}
                       </a>
                     ) : (
-                      <div className="text-primary-400 font-medium">{info.content}</div>
+                      <div className="text-ember-400 font-semibold mb-1">{info.content}</div>
                     )}
-                    <div className="text-secondary-400 text-sm">{info.description}</div>
+                    <div className="text-secondary-300 text-sm">{info.description}</div>
                   </div>
                 </motion.div>
               ))}
             </div>
 
             {/* ElevenLabs Voice Widget Placeholder */}
-            <div className="mt-12 card">
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-                <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center mr-3">
+            <div className="mt-12 card-glow">
+              <h3 className="text-xl font-bold text-white mb-5 flex items-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-ember-700 to-ember-800 rounded-xl flex items-center justify-center mr-3 shadow-glow-sm">
                   🎤
                 </div>
                 Talk to Forge Assistant
               </h3>
-              <p className="text-secondary-300 mb-4">
+              <p className="text-secondary-100 mb-6 leading-relaxed">
                 Experience our AI voice assistant for instant responses to your questions.
               </p>
-              <div className="bg-secondary-800 rounded-lg p-8 text-center border-2 border-dashed border-secondary-600">
-                <div className="text-secondary-400 mb-2">[ElevenLabs Voice Widget]</div>
-                <div className="text-sm text-secondary-500">
+              <div className="bg-forge-slate rounded-xl p-10 text-center border-2 border-dashed border-forge-steel/40">
+                <div className="text-secondary-300 mb-2 font-semibold">[ElevenLabs Voice Widget]</div>
+                <div className="text-sm text-secondary-400">
                   Voice interaction widget will be integrated here
                 </div>
               </div>
@@ -238,9 +239,9 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="card"
+            className="card-glow"
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
+            <h2 className="text-3xl font-bold text-white mb-8">Send us a Message</h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -366,22 +367,22 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mt-16"
+          className="mt-20"
         >
-          <div className="card text-center">
-            <h2 className="text-2xl font-bold text-white mb-4">
-              Schedule a Consultation
+          <div className="card-glow text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Schedule a <span className="text-gradient-ember">Consultation</span>
             </h2>
-            <p className="text-secondary-300 mb-8">
+            <p className="text-secondary-100 mb-10 max-w-2xl mx-auto text-lg leading-relaxed">
               Prefer to speak with us directly? Book a free 30-minute consultation
               to discuss your project in detail.
             </p>
-            <div className="bg-secondary-800 rounded-lg p-12 border-2 border-dashed border-secondary-600">
-              <div className="text-secondary-400 mb-2">[Calendly Widget]</div>
-              <div className="text-sm text-secondary-500">
+            <div className="bg-forge-slate rounded-xl p-16 border-2 border-dashed border-forge-steel/40">
+              <div className="text-secondary-200 mb-3 font-semibold text-lg">[Calendly Widget]</div>
+              <div className="text-sm text-secondary-400 mb-6">
                 Interactive scheduling widget will be integrated here
               </div>
-              <button className="btn-secondary mt-4">
+              <button className="btn-secondary shadow-lg">
                 Open Calendar
               </button>
             </div>
