@@ -24,7 +24,9 @@ logger = structlog.get_logger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan context manager"""
-    logger.info("Starting ShortForge API")
+    import os
+    port = os.getenv("PORT", "8000")
+    logger.info(f"Starting ShortForge API on port {port}")
     try:
         # Create database tables
         create_tables()
@@ -64,6 +66,11 @@ app.include_router(api_router, prefix=settings.API_V1_STR)
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy", "service": "shortforge-api"}
+
+@app.get("/")
+async def root_health_check():
+    """Root health check endpoint for Railway"""
+    return {"status": "healthy", "service": "shortforge-api", "message": "API is running"}
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
