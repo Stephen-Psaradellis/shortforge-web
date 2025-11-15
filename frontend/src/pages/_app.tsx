@@ -1,4 +1,5 @@
 import type { AppProps } from 'next/app';
+import Head from 'next/head';
 import { AuthProvider } from '@/hooks/useAuth';
 import Layout from '@/components/Layout';
 import '@/styles/globals.css';
@@ -6,10 +7,19 @@ import { Toaster } from 'react-hot-toast';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <AuthProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+    <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <AuthProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       <Toaster
         position="top-right"
         toastOptions={{
@@ -61,6 +71,7 @@ export default function App({ Component, pageProps }: AppProps) {
           },
         }}
       />
-    </AuthProvider>
+      </AuthProvider>
+    </>
   );
 }

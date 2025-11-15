@@ -8,12 +8,13 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 
 from app.core.database import get_db
+from app.services.pitch import pitch_service
 
 router = APIRouter()
 
 
 @router.get("/domain/{domain_id}")
-def get_business_intelligence_by_domain(
+async def get_business_intelligence_by_domain(
     *,
     db: Session = Depends(get_db),
     domain_id: str,
@@ -69,7 +70,19 @@ def get_business_intelligence_by_domain(
             "raw_data": raw_data,     # Include the raw data from the database
         }
 
-        return {"data": transformed_data}
+        # Generate marketing pitch using the business intelligence
+        marketing_pitch = None
+        try:
+            marketing_pitch = await pitch_service.generate_pitch(transformed_data, "Forge Assistant")
+        except Exception as pitch_error:
+            # Log the error but don't fail the entire request
+            print(f"Warning: Failed to generate marketing pitch: {pitch_error}")
+            # Could implement fallback pitch here if needed
+
+        return {
+            "data": transformed_data,
+            "marketing_pitch": marketing_pitch.to_dict() if marketing_pitch else None
+        }
 
     except HTTPException:
         raise

@@ -68,7 +68,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', 'monospace'],
         mono: ['JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', 'monospace'],
       },
       fontSize: {

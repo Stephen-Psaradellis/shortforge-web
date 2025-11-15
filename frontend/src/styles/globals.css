@@ -23,7 +23,7 @@ html {
 }
 
 body {
-  @apply bg-forge-black text-secondary-50;
+  @apply bg-forge-black text-secondary-50 font-sans;
 }
 
 /* Custom Scrollbar - ShortForge Theme */
