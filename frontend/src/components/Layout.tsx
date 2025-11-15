@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
+import { ShortForgeLogo } from '@/components/logos';
 
 // Type declaration for ElevenLabs Convai widget
 declare global {
@@ -96,11 +97,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-br from-ember-700 to-ember-800 rounded-lg flex items-center justify-center shadow-glow-sm group-hover:shadow-glow transition-all duration-300">
-                <span className="text-white font-bold text-lg">SF</span>
-              </div>
-              <span className="text-xl font-bold text-white tracking-tight">ShortForge</span>
+            <Link href="/">
+              <ShortForgeLogo size="md" showText={true} />
             </Link>
 
             {/* Desktop Navigation */}
@@ -247,11 +245,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center space-x-3 mb-6 group">
-                <div className="w-10 h-10 bg-gradient-to-br from-ember-700 to-ember-800 rounded-lg flex items-center justify-center shadow-glow-sm group-hover:shadow-glow transition-all duration-300">
-                  <span className="text-white font-bold text-lg">SF</span>
-                </div>
-                <span className="text-2xl font-bold text-white tracking-tight">ShortForge</span>
+              <div className="mb-6">
+                <ShortForgeLogo size="lg" showText={true} />
               </div>
               <p className="text-secondary-200 mb-6 leading-relaxed max-w-md">
                 Empowering businesses with AI, automation, and innovative IT solutions.

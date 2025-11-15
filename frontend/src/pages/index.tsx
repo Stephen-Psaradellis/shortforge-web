@@ -13,6 +13,7 @@ import {
   TrendingUp
 } from 'lucide-react';
 import { ServiceCardProps, TestimonialProps } from '@/types';
+import { ShortForgeAnimatedHero, ShortForgePattern } from '@/components/logos';
 
 const services = [
   {
@@ -206,6 +207,9 @@ export default function Home() {
     <div className="min-h-screen bg-forge-black">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-forge-black via-forge-obsidian to-forge-charcoal">
+        {/* Background logo pattern */}
+        <ShortForgePattern count={15} opacity={0.03} size={100} />
+        
         {/* Background particles */}
         <div className="particles">
           {[...Array(25)].map((_, i) => (
@@ -233,10 +237,20 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center relative z-10"
           >
+            {/* Animated Logo */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex justify-center mb-12"
+            >
+              <ShortForgeAnimatedHero size={140} />
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="mb-8"
             >
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 tracking-tight">
@@ -250,7 +264,7 @@ export default function Home() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
               className="text-xl md:text-2xl text-secondary-100 mb-12 max-w-4xl mx-auto leading-relaxed"
             >
               Transform your business with intelligent AI agents, streamlined automation systems,
@@ -260,7 +274,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
             >
               <motion.div

@@ -10,6 +10,7 @@ import { z } from 'zod';
 import { Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
+import { ShortForgeLogo } from '@/components/logos';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -55,11 +56,8 @@ export default function Login() {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <Link href="/" className="inline-flex items-center space-x-3 mb-10 group">
-            <div className="w-12 h-12 bg-gradient-to-br from-ember-700 to-ember-800 rounded-lg flex items-center justify-center shadow-glow-sm group-hover:shadow-glow transition-all duration-300">
-              <span className="text-white font-bold text-xl">SF</span>
-            </div>
-            <span className="text-3xl font-bold text-white">ShortForge</span>
+          <Link href="/" className="inline-block mb-10">
+            <ShortForgeLogo size="lg" showText={true} />
           </Link>
 
           <h2 className="text-4xl font-bold text-white mb-4">Welcome Back</h2>

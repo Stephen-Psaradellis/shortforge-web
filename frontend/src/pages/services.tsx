@@ -19,6 +19,7 @@ import {
   Code,
   Settings
 } from 'lucide-react';
+import { ShortForgeIcon, ShortForgePattern } from '@/components/logos';
 
 const services = [
   {
@@ -321,8 +322,11 @@ const ServiceDetail: React.FC<{ service: typeof services[0] }> = ({ service }) =
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-forge-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
+    <div className="min-h-screen bg-forge-black relative">
+      {/* Background logo pattern */}
+      <ShortForgePattern count={10} opacity={0.02} size={110} />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -330,6 +334,16 @@ export default function Services() {
           transition={{ duration: 0.6 }}
           className="text-center mb-24"
         >
+          {/* Logo Icon */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center mb-8"
+          >
+            <ShortForgeIcon size={75} glow={true} />
+          </motion.div>
+          
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-8">
             Our <span className="text-gradient-ember">Services</span>
           </h1>

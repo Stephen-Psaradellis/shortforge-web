@@ -17,6 +17,7 @@ import {
 import { inquiriesApi } from '@/lib/api';
 import toast from 'react-hot-toast';
 import { ContactForm as ContactFormType } from '@/types';
+import { ShortForgeIcon, ShortForgePattern } from '@/components/logos';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -148,8 +149,11 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen bg-forge-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
+    <div className="min-h-screen bg-forge-black relative">
+      {/* Background logo pattern */}
+      <ShortForgePattern count={8} opacity={0.02} size={100} />
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -157,6 +161,16 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
+          {/* Logo Icon */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center mb-8"
+          >
+            <ShortForgeIcon size={70} glow={true} />
+          </motion.div>
+          
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-8">
             Get In <span className="text-gradient-ember">Touch</span>
           </h1>
