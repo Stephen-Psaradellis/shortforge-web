@@ -394,7 +394,9 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
 
     try {
       // Direct fetch to backend API for server-side rendering
-      const apiUrl = process.env.NEXT_PUBLIC_SHORTFORGE_WEB_URL || 'http://localhost:8000';
+      const baseUrl = process.env.NEXT_PUBLIC_SHORTFORGE_WEB_URL || 'http://localhost:8000';
+      // Ensure the base URL has a protocol
+      const apiUrl = baseUrl.startsWith('http') ? baseUrl : `https://${baseUrl}`;
       const response = await fetch(`${apiUrl}/api/v1/business-intelligence/domain/${actualDomain}`);
 
       if (!response.ok) {
