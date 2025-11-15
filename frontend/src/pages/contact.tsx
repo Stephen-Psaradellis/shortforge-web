@@ -32,22 +32,22 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email Us',
-    content: 'hello@shortforge.com',
+    content: 'stephen.psaradellis@shortforge.com',
     description: 'Send us an email anytime',
-    href: 'mailto:hello@shortforge.com'
+    href: 'mailto:stephen.psaradellis@shortforge.com'
   },
   {
     icon: Phone,
     title: 'Call Us',
-    content: '+1 (555) 123-4567',
+    content: '+1 (224) 715-3678',
     description: 'Mon-Fri 9AM-6PM EST',
-    href: 'tel:+15551234567'
+    href: 'tel:+12247153678'
   },
   {
     icon: MapPin,
     title: 'Visit Us',
-    content: '123 Innovation Drive',
-    description: 'Tech City, TC 12345',
+    content: '1332 N Vail Ave',
+    description: 'Arlington Heights, IL 60004',
     href: '#'
   },
   {

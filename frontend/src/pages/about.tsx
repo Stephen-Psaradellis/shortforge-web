@@ -287,7 +287,7 @@ export default function About() {
         </motion.div>
 
         {/* Timeline */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -308,10 +308,10 @@ export default function About() {
               <Milestone key={index} milestone={milestone} />
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* Team */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -333,7 +333,7 @@ export default function About() {
               <TeamMember key={index} member={member} />
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* CTA */}
         <motion.div
