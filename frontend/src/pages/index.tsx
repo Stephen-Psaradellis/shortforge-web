@@ -350,7 +350,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-28 bg-forge-charcoal border-y border-forge-steel/10">
+      {/* <section className="py-28 bg-forge-charcoal border-y border-forge-steel/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -374,7 +374,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="relative py-32 bg-forge-black overflow-hidden">
