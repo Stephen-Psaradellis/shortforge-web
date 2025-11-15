@@ -25,8 +25,15 @@ logger = structlog.get_logger(__name__)
 async def lifespan(app: FastAPI):
     """Application lifespan context manager"""
     logger.info("Starting ShortForge API")
-    # Create database tables
-    create_tables()
+    try:
+        # Create database tables
+        create_tables()
+        logger.info("Database tables created successfully")
+    except Exception as e:
+        logger.error("Failed to create database tables", exc_info=e)
+        # Don't crash the app if database is unavailable - let endpoints handle it
+        logger.warning("Continuing startup without database tables")
+
     yield
     logger.info("Shutting down ShortForge API")
 

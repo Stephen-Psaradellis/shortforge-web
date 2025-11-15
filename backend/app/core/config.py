@@ -25,9 +25,9 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = [
         "http://localhost:3000",  # Next.js dev server
         "http://localhost:8000",  # FastAPI dev server
-        "https://shortforge.com",  # Production domain
-        "https://shortforge-web.vercel.app",  # Vercel frontend
-        "https://shortforge-web-git-main.vercel.app",  # Vercel preview deployments
+        "https://shortforge.dev",  # Production domain
+        "https://www.shortforge.dev",  # Production www domain
+        "https://short-forge-nextjs.vercel.app"  # Vercel frontend
     ]
 
     @field_validator("BACKEND_CORS_ORIGINS", mode="before")
@@ -48,17 +48,28 @@ class Settings(BaseSettings):
     POSTGRES_DB: str = "railway"
     POSTGRES_PORT: str = "5432"
     SUPAGENT_DATABASE_URL: Optional[str] = os.getenv("SUPAGENT_DATABASE_URL")
-    DATABASE_URL: Optional[str] = None
+    DATABASE_URL: Optional[str] = os.getenv("DATABASE_URL")
 
     @field_validator("DATABASE_URL", mode="before")
     @classmethod
     def assemble_db_connection(cls, v: Optional[str], info: ValidationInfo) -> str:
+        # Use DATABASE_URL if provided (Railway standard)
+        if isinstance(v, str) and v:
+            return v
         # Use SUPAGENT_DATABASE_URL if available
         if info.data.get('SUPAGENT_DATABASE_URL'):
             return info.data.get('SUPAGENT_DATABASE_URL')
-        if isinstance(v, str):
-            return v
-        return f"postgresql://{info.data.get('POSTGRES_USER')}:{info.data.get('POSTGRES_PASSWORD')}@{info.data.get('POSTGRES_SERVER')}:{info.data.get('POSTGRES_PORT')}/{info.data.get('POSTGRES_DB')}"
+        # Fallback to constructing from components
+        password = info.data.get('POSTGRES_PASSWORD')
+        user = info.data.get('POSTGRES_USER')
+        server = info.data.get('POSTGRES_SERVER')
+        port = info.data.get('POSTGRES_PORT')
+        db = info.data.get('POSTGRES_DB')
+
+        if not password:
+            raise ValueError("Database password not configured. Set DATABASE_URL or POSTGRES_PASSWORD environment variable.")
+
+        return f"postgresql://{user}:{password}@{server}:{port}/{db}"
 
     # Stripe
     STRIPE_SECRET_KEY: str = ""
