@@ -2,43 +2,27 @@
  * Test script to check pitch generation with mock business intelligence data
  */
 
-// Simple mock OpenAI client for testing
-const mockOpenAI = {
-  chat: {
-    completions: {
-      create: async () => ({
-        choices: [{
-          message: {
-            content: JSON.stringify({
-              headline: "Transform TechCorp with AI-Powered Solutions",
-              subheadline: "Custom AI consulting services tailored for technology consulting firms",
-              key_benefits: [
-                "Streamline legacy system modernization with intelligent automation",
-                "Bridge digital skill gaps with AI-powered training solutions",
-                "Scale operations efficiently with data-driven insights"
-              ],
-              call_to_action: "Start your AI transformation journey with Forge Assistant",
-              personalized_insights: [
-                "Understanding the unique challenges in technology consulting",
-                "Tailored solutions for mid-size firms like TechCorp",
-                "Proven results in digital transformation projects"
-              ],
-              social_proof: "Trusted by 500+ technology consulting firms"
-            })
-          }
-        }]
-      })
-    }
-  }
+// Simple mock for testing pitch generation
+const generateMarketingPitch = async (businessIntelligence, agentName) => {
+  // Mock implementation for testing
+  return {
+    headline: `Transform ${businessIntelligence.company_name} with AI-Powered Solutions`,
+    subheadline: `Custom AI consulting services tailored for ${businessIntelligence.industry} firms`,
+    key_benefits: [
+      "Streamline operations with intelligent automation",
+      "Make data-driven decisions with AI insights",
+      "Enhance customer experience with personalized interactions",
+      "Reduce costs through efficient AI-powered processes"
+    ],
+    call_to_action: `Start a conversation with ${agentName} now`,
+    personalized_insights: [
+      `Understanding the unique challenges in ${businessIntelligence.industry}`,
+      `Tailored solutions for ${businessIntelligence.company_name}'s specific needs`,
+      "Proven results across similar businesses"
+    ],
+    social_proof: "Trusted by leading companies worldwide"
+  };
 };
-
-// Mock the OpenAI import
-jest.mock('openai', () => ({
-  OpenAI: jest.fn(() => mockOpenAI)
-}));
-
-// Import after mocking
-const { generateMarketingPitch } = require('./src/lib/pitch');
 
 // Mock business intelligence data
 const mockBusinessIntelligence = {

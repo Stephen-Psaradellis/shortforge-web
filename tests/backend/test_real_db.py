@@ -3,6 +3,17 @@
 Test script for business intelligence endpoint with real database connection
 """
 
+import sys
+import os
+
+# Add backend to path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'backend'))
+
+# Clear frontend env vars that cause issues in backend
+for key in list(os.environ.keys()):
+    if key.startswith('NEXT_PUBLIC_'):
+        del os.environ[key]
+
 from app.core.database import get_db
 from app.api.v1.endpoints.business_intelligence import get_business_intelligence_by_domain, business_intelligence_health
 
@@ -12,7 +23,7 @@ try:
 
     # Test health endpoint
     health_result = business_intelligence_health()
-    print('Health endpoint works!')
+    print('PASS: Health endpoint works!')
     print(f'Response: {health_result}')
 
     # Test domain endpoint for domain_id '1'
@@ -20,7 +31,7 @@ try:
     db = next(get_db())
     try:
         result = get_business_intelligence_by_domain(db=db, domain_id='1')
-        print('Domain endpoint works!')
+        print('PASS: Domain endpoint works!')
         data = result['data']
         print(f'Company: {data.get("company_name", "N/A")}')
         print(f'Industry: {data.get("industry", "N/A")}')
@@ -33,15 +44,15 @@ try:
                 print(f'Key Products: {products[:50]}...')
         print('\nFull data keys:', list(data.keys()))
     except Exception as e:
-        print(f'Domain endpoint failed for domain 1: {e}')
+        print(f'FAIL: Domain endpoint failed for domain 1: {e}')
 
     # Test domain endpoint for non-existent domain
     print('\nTesting domain endpoint for non-existent domain...')
     try:
         result = get_business_intelligence_by_domain(db=db, domain_id='999')
-        print('Should have failed for non-existent domain')
+        print('FAIL: Should have failed for non-existent domain')
     except Exception as e:
-        print(f'Correctly failed for non-existent domain: {type(e).__name__}')
+        print(f'PASS: Correctly failed for non-existent domain: {type(e).__name__}')
 
     db.close()
     print('\nDatabase Integration Test Completed Successfully!')

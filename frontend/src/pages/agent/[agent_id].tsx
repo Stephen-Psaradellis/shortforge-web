@@ -393,11 +393,30 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
     let hasApiError = false;
 
     try {
-      businessIntelligence = await businessIntelligenceApi.getByDomain(actualDomain);
+      // Direct fetch to backend API for server-side rendering
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/api/v1/business-intelligence/domain/${actualDomain}`);
+
+      if (!response.ok) {
+        // Try to get error details from response body
+        let errorDetails = `HTTP ${response.status}`;
+        try {
+          const errorData = await response.json();
+          errorDetails = errorData.message || errorData.detail || errorDetails;
+        } catch {
+          // If we can't parse the error response, use the status text
+          errorDetails = response.statusText || errorDetails;
+        }
+        throw new Error(`API request failed: ${errorDetails}`);
+      }
+
+      const data = await response.json();
+      businessIntelligence = data.data;
       console.log('Business intelligence data:', businessIntelligence);
     } catch (apiError: any) {
       hasApiError = true;
       console.error('Backend business intelligence API error:', apiError);
+      console.error('Error details:', apiError.message);
 
       // For debugging/development, you might want to re-throw to see errors
       // But for production, we gracefully fall back to mock data
@@ -455,7 +474,7 @@ export const getServerSideProps: GetServerSideProps<AgentPageProps> = async (con
       ],
       voice_enabled: true,
       elevenlabs_agent_id: agent_id, // Use the agent_id from route params for ElevenLabs
-      elevenlabs_api_key: process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY || undefined,
+      elevenlabs_api_key: process.env.NEXT_PUBLIC_ELEVENLABS_API_KEY || null,
     };
 
     // Generate marketing pitch if we have business intelligence
