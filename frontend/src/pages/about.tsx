@@ -14,7 +14,7 @@ import {
   Code,
   Zap
 } from 'lucide-react';
-import { ShortForgeIcon, ShortForgePattern } from '@/components/logos';
+import { ShortForgeIcon, ShortForgePattern, ShortForgeText } from '@/components/logos';
 
 const team = [
   {
@@ -203,7 +203,7 @@ export default function About() {
           </motion.div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-8">
-            About <span className="text-gradient-ember">ShortForge</span>
+            About <ShortForgeText size="xl" className="inline-block ml-2" />
           </h1>
           <p className="text-xl text-secondary-100 max-w-4xl mx-auto leading-relaxed">
             We're a team of AI researchers, engineers, and business strategists
@@ -365,7 +365,7 @@ export default function About() {
                 Ready to <span className="text-gradient-ember">Work With Us?</span>
               </h2>
               <p className="text-secondary-100 mb-10 max-w-3xl mx-auto text-lg leading-relaxed">
-                Join hundreds of companies already transforming their business with ShortForge.
+                Join hundreds of companies already transforming their business with <ShortForgeText size="sm" className="inline-block mx-1" />.
                 Let's discuss how we can help you achieve your goals.
               </p>
               <div className="flex flex-col sm:flex-row gap-5 justify-center">

@@ -15,6 +15,7 @@ import { MessageCircle, TrendingUp, Users, Target, ArrowRight, AlertCircle } fro
 
 import { AgentPageProps, BusinessIntelligence, AgentMetadata, MarketingPitch } from '../../types';
 import { businessIntelligenceApi } from '../../lib/api';
+import { ShortForgeText } from '../../components/logos';
 
 // Type declaration for ElevenLabs Convai widget
 declare global {
@@ -315,7 +316,7 @@ const AgentPage: NextPage<AgentPageProps> = ({
                 className="text-center mb-12"
               >
                 <h2 className="text-3xl font-bold text-secondary-900 mb-4">
-                  Why Choose ShortForge?
+                  Why Choose <ShortForgeText size="md" className="inline-block mx-1" />?
                 </h2>
                 <p className="text-lg text-secondary-600">
                   Personalized insights tailored to your business

@@ -1,0 +1,28 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1600 250" width="400" height="200"
+    preserveAspectRatio="xMidYMid meet">
+
+     <!-- TEXT STYLES -->
+     <style>
+       .codefont {
+         font-family: "JetBrains Mono", monospace;
+         font-size: 220px;
+         font-weight: 700;
+         text-shadow:
+           0.25px  0.25px 0 #FFF,
+          -0.25px  0.25px 0 #FFF,
+           0.25px -0.25px 0 #FFF,
+          -0.25px -0.25px 0 #FFF,
+           0.25px  0px 0 #FFF,
+          -0.25px  0px 0 #FFF,
+           0px  0.25px 0 #FFF,
+           0px -0.25px 0 #FFF;
+       }
+     </style>
+
+    <text x="520" y="180" text-anchor="middle" class="codefont" fill="#1A1A1A">
+    Short
+    </text>
+    <text x="1130" y="180" text-anchor="middle" class="codefont" fill="#E91A40">Forge</text>
+
+</svg>

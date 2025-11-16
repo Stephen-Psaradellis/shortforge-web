@@ -55,7 +55,30 @@ import { ShortForgeIcon } from '@/components/logos';
 
 ---
 
-### 3. ShortForgeLoadingSpinner
+### 3. ShortForgeText
+**Styled brand text** - Displays "ShortForge" with custom typography and colors.
+
+```tsx
+import { ShortForgeText } from '@/components/logos';
+
+<ShortForgeText
+  size="md"         // Size variant: 'sm', 'md', 'lg', 'xl'
+  className=""      // Additional CSS classes
+/>
+```
+
+**Props:**
+- `size`: Text size variant (default: `'md'`)
+- `className`: Additional CSS classes
+
+**Usage Examples:**
+- Headlines: `<ShortForgeText size="xl" className="inline-block ml-2" />`
+- Body text: `<ShortForgeText size="sm" className="inline-block mx-1" />`
+- Copyright: `<ShortForgeText size="sm" className="inline-block mx-1" />`
+
+---
+
+### 4. ShortForgeLoadingSpinner
 **Animated loading indicator** - A logo-based loading state.
 
 ```tsx
@@ -81,7 +104,7 @@ import { ShortForgeLoadingSpinner } from '@/components/logos';
 
 ---
 
-### 4. ShortForgePattern
+### 5. ShortForgePattern
 **Background pattern decoration** - Creates a subtle logo pattern for backgrounds.
 
 ```tsx
@@ -108,7 +131,7 @@ import { ShortForgePattern } from '@/components/logos';
 
 ---
 
-### 5. ShortForgeAnimatedHero
+### 6. ShortForgeAnimatedHero
 **Large animated hero logo** - For impactful hero sections.
 
 ```tsx
@@ -225,6 +248,7 @@ frontend/src/components/logos/
 ├── index.ts                      # Barrel exports
 ├── ShortForgeLogo.tsx            # Full logo with text
 ├── ShortForgeIcon.tsx            # Icon only
+├── ShortForgeText.tsx            # Styled text component
 ├── ShortForgeLoadingSpinner.tsx  # Animated loading
 ├── ShortForgePattern.tsx         # Background pattern
 ├── ShortForgeAnimatedHero.tsx    # Hero animation

@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { Eye, EyeOff, UserPlus, AlertCircle, CheckCircle } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
-import { ShortForgeLogo } from '@/components/logos';
+import { ShortForgeLogo, ShortForgeText } from '@/components/logos';
 
 const registerSchema = z.object({
   full_name: z.string().min(2, 'Full name must be at least 2 characters'),
@@ -101,7 +101,7 @@ export default function Register() {
 
           <h2 className="text-4xl font-bold text-white mb-4">Create Account</h2>
           <p className="text-secondary-200 text-lg">
-            Join ShortForge and transform your business
+            Join <ShortForgeText size="sm" className="inline-block mx-1" /> and transform your business
           </p>
         </motion.div>
 
