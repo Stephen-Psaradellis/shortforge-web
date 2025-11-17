@@ -18,10 +18,10 @@ export const ShortForgeText: React.FC<ShortForgeTextProps> = ({
   className = ''
 }) => {
 const sizeClasses = {
-  sm: 'w-32 h-auto',
-  md: 'w-40 h-auto',
-  lg: 'w-48 h-auto',
-  xl: 'w-64 h-auto'
+  sm: 'w-24 h-auto',
+  md: 'w-32 h-auto',
+  lg: 'w-40 h-auto',
+  xl: 'w-48 h-auto'
 };
 
   return (
@@ -50,10 +50,10 @@ const sizeClasses = {
               0px  0.25px 0 #FFF,
               0px -0.25px 0 #FFF;
           }
-          .text-sm { font-size: 160px; }
+          .text-sm { font-size: 220px; }
           .text-md { font-size: 220px; }
-          .text-lg { font-size: 280px; }
-          .text-xl { font-size: 360px; }
+          .text-lg { font-size: 220px; }
+          .text-xl { font-size: 220px; }
         `}
       </style>
 

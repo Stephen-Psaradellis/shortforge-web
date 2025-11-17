@@ -17,7 +17,7 @@ import {
 import { inquiriesApi } from '@/lib/api';
 import toast from 'react-hot-toast';
 import { ContactForm as ContactFormType } from '@/types';
-import { ShortForgeIcon, ShortForgePattern, ShortForgeText } from '@/components/logos';
+import { ShortForgeIcon, ShortForgePattern } from '@/components/logos';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -176,7 +176,7 @@ export default function Contact() {
           </h1>
           <p className="text-xl text-secondary-100 max-w-4xl mx-auto leading-relaxed">
             Ready to transform your business with AI and automation? Let's discuss how
-            <ShortForgeText size="sm" className="inline-block mx-1" /> can help you achieve your goals.
+            <span className="font-bold"><span className="text-forge-charcoal">Short</span><span className="text-ember-600">Forge</span></span> can help you achieve your goals.
           </p>
         </motion.div>
 

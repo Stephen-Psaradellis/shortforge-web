@@ -13,7 +13,7 @@ import {
   TrendingUp
 } from 'lucide-react';
 import { ServiceCardProps, TestimonialProps } from '@/types';
-import { ShortForgeAnimatedHero, ShortForgePattern, ShortForgeText } from '@/components/logos';
+import { ShortForgeAnimatedHero, ShortForgePattern } from '@/components/logos';
 
 const services = [
   {
@@ -407,7 +407,7 @@ export default function Home() {
               Ready to <span className="text-gradient-ember">Forge Your Future?</span>
             </h2>
             <p className="text-xl md:text-2xl text-secondary-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Join hundreds of companies already transforming their business with <ShortForgeText size="sm" className="inline-block mx-1" />.
+              Join hundreds of companies already transforming their business with <span className="font-bold"><span className="text-forge-charcoal">Short</span><span className="text-ember-600">Forge</span></span>.
               Let's discuss how we can help you achieve your goals.
             </p>
 

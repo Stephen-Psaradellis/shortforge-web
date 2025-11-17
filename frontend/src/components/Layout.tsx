@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
-import { ShortForgeLogo, ShortForgeText } from '@/components/logos';
+import { ShortForgeLogo } from '@/components/logos';
 
 // Type declaration for ElevenLabs Convai widget
 declare global {
@@ -322,7 +322,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <div className="border-t border-forge-steel/20 mt-12 pt-8 text-center">
             <p className="text-secondary-300">
-              © 2024 <ShortForgeText size="sm" className="inline-block mx-1" />. All rights reserved.
+              © 2024 <span className="font-bold"><span className="text-forge-charcoal">Short</span><span className="text-ember-600">Forge</span></span>. All rights reserved.
             </p>
           </div>
         </div>

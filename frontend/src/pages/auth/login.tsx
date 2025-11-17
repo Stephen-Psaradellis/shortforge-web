@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
-import { ShortForgeLogo, ShortForgeText } from '@/components/logos';
+import { ShortForgeLogo } from '@/components/logos';
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -62,7 +62,7 @@ export default function Login() {
 
           <h2 className="text-4xl font-bold text-white mb-4">Welcome Back</h2>
           <p className="text-secondary-200 text-lg">
-            Sign in to your <ShortForgeText size="sm" className="inline-block mx-1" /> account
+            Sign in to your <span className="font-bold"><span className="text-forge-charcoal">Short</span><span className="text-ember-600">Forge</span></span> account
           </p>
         </motion.div>
 
