@@ -211,7 +211,7 @@ export default function Home() {
         <ShortForgePattern count={15} opacity={0.03} size={100} />
         
         {/* Background particles */}
-        <div className="particles">
+        {/* <div className="particles">
           {[...Array(25)].map((_, i) => (
             <div
               key={i}
@@ -225,7 +225,7 @@ export default function Home() {
               }}
             />
           ))}
-        </div>
+        </div> */}
         
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 grid-bg opacity-20"></div>
@@ -238,14 +238,14 @@ export default function Home() {
             className="text-center relative z-10"
           >
             {/* Animated Logo */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="flex justify-center mb-12"
             >
               <ShortForgeAnimatedHero size={140} />
-            </motion.div>
+            </motion.div> */}
 
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
