@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import shortforgeSvg from '@/assets/shortforge.svg';
+import shortforgeLogo from '@/assets/shortforge-logo.svg';
 
 interface ShortForgeIconProps {
   size?: number;
@@ -38,7 +38,7 @@ export const ShortForgeIcon: React.FC<ShortForgeIconProps> = ({
       onClick={onClick}
     >
       <Image
-        src={shortforgeSvg}
+        src={shortforgeLogo}
         alt="ShortForge Icon"
         width={size}
         height={size}

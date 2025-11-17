@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import shortforgeSvg from '@/assets/shortforge.svg';
+import shortforgeLogo from '@/assets/shortforge-logo.svg';
 
 interface ShortForgeLogoProps {
   showText?: boolean;
@@ -46,7 +46,7 @@ export const ShortForgeLogo: React.FC<ShortForgeLogoProps> = ({
     >
       <div className="relative overflow-hidden rounded-lg shadow-glow-sm group-hover:shadow-glow transition-all duration-300 flex-shrink-0">
         <Image
-          src={shortforgeSvg}
+          src={shortforgeLogo}
           alt="ShortForge Logo"
           width={img}
           height={img}

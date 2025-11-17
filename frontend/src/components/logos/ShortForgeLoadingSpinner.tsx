@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import shortforgeSvg from '@/assets/shortforge.svg';
+import shortforgeLogo from '@/assets/shortforge-logo.svg';
 
 interface ShortForgeLoadingSpinnerProps {
   size?: number;
@@ -55,7 +55,7 @@ export const ShortForgeLoadingSpinner: React.FC<ShortForgeLoadingSpinnerProps> =
         />
         <div className="relative rounded-lg overflow-hidden">
           <Image
-            src={shortforgeSvg}
+            src={shortforgeLogo}
             alt="Loading"
             width={size}
             height={size}

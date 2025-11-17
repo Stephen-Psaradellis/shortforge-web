@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import shortforgeSvg from '@/assets/shortforge.svg';
+import shortforgeLogo from '@/assets/shortforge-logo.svg';
 
 interface ShortForgeAnimatedHeroProps {
   size?: number;
@@ -57,7 +57,7 @@ export const ShortForgeAnimatedHero: React.FC<ShortForgeAnimatedHeroProps> = ({
         }}
       >
         <Image
-          src={shortforgeSvg}
+          src={shortforgeLogo}
           alt="ShortForge"
           width={size}
           height={size}

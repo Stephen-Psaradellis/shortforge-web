@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
-import shortforgeSvg from '@/assets/shortforge.svg';
+import shortforgeLogo from '@/assets/shortforge-logo.svg';
 
 interface ShortForgePatternProps {
   count?: number;
@@ -26,25 +26,49 @@ export const ShortForgePattern: React.FC<ShortForgePatternProps> = ({
   size = 80,
   className = ''
 }) => {
+  /**
+   * Deterministic pseudo-random generator so the pattern renders
+   * identically during SSR and CSR, avoiding hydration mismatches.
+   */
+  const pseudoRandom = (seed: number) => {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  };
+
+  const patternDots = useMemo(
+    () =>
+      Array.from({ length: count }, (_, i) => {
+        const seed = i + 1;
+        return {
+          left: `${pseudoRandom(seed) * 100}%`,
+          top: `${pseudoRandom(seed + 1) * 100}%`,
+          rotation: pseudoRandom(seed + 2) * 360,
+          scale: 0.5 + pseudoRandom(seed + 3),
+        };
+      }),
+    [count]
+  );
+
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
-      {[...Array(count)].map((_, i) => (
+      {patternDots.map((dot, index) => (
         <div
-          key={i}
+          key={`shortforge-pattern-${index}`}
           className="absolute"
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            opacity: opacity,
-            transform: `rotate(${Math.random() * 360}deg) scale(${0.5 + Math.random() * 1})`,
+            left: dot.left,
+            top: dot.top,
+            opacity,
+            transform: `rotate(${dot.rotation}deg) scale(${dot.scale})`,
           }}
         >
           <Image
-            src={shortforgeSvg}
+            src={shortforgeLogo}
             alt=""
             width={size}
             height={size}
             className="object-contain"
+            priority={index < 5}
           />
         </div>
       ))}
