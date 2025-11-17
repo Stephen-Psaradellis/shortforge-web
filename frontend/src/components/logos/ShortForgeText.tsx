@@ -40,15 +40,6 @@ const sizeClasses = {
           .codefont {
             font-family: "JetBrains Mono", monospace;
             font-weight: 700;
-            text-shadow:
-              0.25px  0.25px 0 #FFF,
-             -0.25px  0.25px 0 #FFF,
-              0.25px -0.25px 0 #FFF,
-             -0.25px -0.25px 0 #FFF,
-              0.25px  0px 0 #FFF,
-             -0.25px  0px 0 #FFF,
-              0px  0.25px 0 #FFF,
-              0px -0.25px 0 #FFF;
           }
           .text-sm { font-size: 220px; }
           .text-md { font-size: 220px; }
@@ -57,10 +48,33 @@ const sizeClasses = {
         `}
       </style>
 
-      <text x="520" y="180" text-anchor="middle" className={`codefont text-${size}`} fill="#1A1A1A">
+      {/* "Short" text with white stroke outline */}
+      <text 
+        x="520" 
+        y="180" 
+        textAnchor="middle" 
+        className={`codefont text-${size}`} 
+        fill="#1A1A1A"
+        stroke="#FFF"
+        strokeWidth="2"
+        strokeLinejoin="round"
+        paintOrder="stroke fill"
+      >
         Short
       </text>
-      <text x="1130" y="180" text-anchor="middle" className={`codefont text-${size}`} fill="#E91A40">
+      
+      {/* "Forge" text with white stroke outline */}
+      <text 
+        x="1130" 
+        y="180" 
+        textAnchor="middle" 
+        className={`codefont text-${size}`} 
+        fill="#E91A40"
+        stroke="#FFF"
+        strokeWidth="2"
+        strokeLinejoin="round"
+        paintOrder="stroke fill"
+      >
         Forge
       </text>
     </svg>
