@@ -73,8 +73,3 @@ sent from the domain.
 
 Old URLs: `/services` redirects to `/automation`, `/work` to the case study. The former
 app routes (`/auth/*`, `/dashboard`, `/admin`, `/agent/*`) return the site's 404 page.
-
-## `backend/`
-
-A FastAPI service from an earlier version of this project. The site no longer calls it.
-It is kept for reference; see `backend/README.md` and `DEPLOYMENT.md`.
