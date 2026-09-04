@@ -160,14 +160,14 @@ const services = [
       },
       {
         icon: Users,
-        title: 'Team Training',
-        description: 'Knowledge transfer and team enablement'
+        title: 'Team Handover',
+        description: 'Documentation and a walkthrough so your people can run it'
       }
     ],
     pricing: {
       starter: { price: '$999', features: ['Architecture Review', 'Basic Recommendations', 'Implementation Guide', 'Email Support'] },
-      professional: { price: '$2,999', features: ['Full Assessment', 'Detailed Roadmap', 'Implementation Support', 'Priority Support', 'Team Training'] },
-      enterprise: { price: 'Custom', features: ['Complete Transformation', 'Full Implementation', 'Ongoing Support', 'Dedicated Team', 'Custom Development', 'SLA Guarantee'] }
+      professional: { price: '$2,999', features: ['Full Assessment', 'Detailed Roadmap', 'Implementation Support', 'Priority Support', 'Team Handover'] },
+      enterprise: { price: 'Custom', features: ['Complete Transformation', 'Full Implementation', 'Ongoing Support', 'Direct Access', 'Custom Development', 'SLA Guarantee'] }
     },
     useCases: [
       'Cloud Migration Planning',
@@ -396,7 +396,7 @@ export default function Services() {
                 Not Sure Which Service is <span className="text-gradient-ember">Right for You?</span>
               </h2>
               <p className="text-secondary-100 mb-10 max-w-3xl mx-auto text-lg leading-relaxed">
-                Our team of experts will assess your needs and recommend the perfect solution
+                I'll look at what you're actually doing today and tell you what's worth automating
                 for your business. Get a free consultation and discover how we can help.
               </p>
               <div className="flex flex-col sm:flex-row gap-5 justify-center">

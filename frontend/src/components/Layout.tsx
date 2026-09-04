@@ -11,6 +11,7 @@ import {
   User,
   Briefcase,
   Phone,
+  Globe,
   Settings,
   LogOut,
   UserCircle
@@ -39,6 +40,7 @@ interface LayoutProps {
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
+  { name: 'Websites', href: '/websites', icon: Globe },
   { name: 'Services', href: '/services', icon: Briefcase },
   { name: 'About', href: '/about', icon: User },
   { name: 'Contact', href: '/contact', icon: Phone },
@@ -176,9 +178,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   >
                     Login
                   </Link>
+                  {/* Hidden on the narrowest phones: at 390px it ran into the
+                      wordmark. The hamburger still reaches every route. */}
                   <Link
                     href="/auth/register"
-                    className="btn-primary text-sm sm:text-base"
+                    className="btn-primary hidden text-sm min-[400px]:inline-flex sm:text-base"
                   >
                     Get Started
                   </Link>
@@ -322,7 +326,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <div className="border-t border-forge-steel/20 mt-12 pt-8 text-center">
             <p className="text-secondary-300">
-              © 2024 <span className="font-bold"><span className="text-forge-charcoal">Short</span><span className="text-ember-600">Forge</span></span>. All rights reserved.
+              © {new Date().getFullYear()} <span className="font-bold"><span className="text-forge-charcoal">Short</span><span className="text-ember-600">Forge</span></span>. All rights reserved.
             </p>
           </div>
         </div>

@@ -12,7 +12,7 @@ import {
   Users,
   TrendingUp
 } from 'lucide-react';
-import { ServiceCardProps, TestimonialProps } from '@/types';
+import { ServiceCardProps } from '@/types';
 import { ShortForgeAnimatedHero, ShortForgePattern } from '@/components/logos';
 
 const services = [
@@ -84,35 +84,13 @@ const services = [
   }
 ];
 
-const testimonials: TestimonialProps[] = [
-  {
-    name: 'Sarah Johnson',
-    company: 'TechCorp Solutions',
-    role: 'CTO',
-    content: 'ShortForge transformed our customer service with their AI agents. Response times improved by 80% and customer satisfaction soared.',
-    avatar: '/avatars/sarah.jpg'
-  },
-  {
-    name: 'Michael Chen',
-    company: 'InnovateLabs',
-    role: 'CEO',
-    content: 'The automation systems they built saved us countless hours and eliminated human error. Their expertise is unmatched.',
-    avatar: '/avatars/michael.jpg'
-  },
-  {
-    name: 'Emily Rodriguez',
-    company: 'DataFlow Systems',
-    role: 'Operations Director',
-    content: 'Their IT consulting helped us migrate to the cloud seamlessly. The entire process was smooth and our costs actually decreased.',
-    avatar: '/avatars/emily.jpg'
-  }
-];
-
+// Scale of the production systems behind this work — every figure traces to a
+// shipped engagement, not a marketing round-up.
 const stats = [
-  { label: 'Projects Completed', value: '150+', icon: CheckCircle },
-  { label: 'Client Satisfaction', value: '98%', icon: Star },
-  { label: 'Team Members', value: '25+', icon: Users },
-  { label: 'Efficiency Increase', value: '300%', icon: TrendingUp }
+  { label: 'Customers served by systems I\'ve built', value: '20M+', icon: Users },
+  { label: 'Annual transactions on platforms I\'ve worked on', value: '$15B+', icon: TrendingUp },
+  { label: 'Global banks delivered for', value: '4', icon: CheckCircle },
+  { label: 'Years building production software', value: '7', icon: Star }
 ];
 
 const ServiceCard: React.FC<ServiceCardProps & { icon: any }> = ({
@@ -173,32 +151,6 @@ const ServiceCard: React.FC<ServiceCardProps & { icon: any }> = ({
     >
       Get Started
     </Link>
-  </motion.div>
-);
-
-const TestimonialCard: React.FC<TestimonialProps> = ({
-  name,
-  company,
-  role,
-  content
-}) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0.95 }}
-    whileInView={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 0.5 }}
-    viewport={{ once: true }}
-    className="card hover-lift"
-  >
-    <div className="flex items-center space-x-1 mb-6">
-      {[...Array(5)].map((_, i) => (
-        <Star key={i} size={18} className="text-ember-500 fill-current" />
-      ))}
-    </div>
-    <p className="text-secondary-100 mb-8 italic text-lg leading-relaxed">"{content}"</p>
-    <div className="border-t border-forge-steel/20 pt-4">
-      <div className="font-bold text-white text-lg">{name}</div>
-      <div className="text-secondary-300 text-sm mt-1">{role}, {company}</div>
-    </div>
   </motion.div>
 );
 
@@ -363,33 +315,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      {/* <section className="py-28 bg-forge-charcoal border-y border-forge-steel/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              What Our <span className="text-gradient-ember">Clients</span> Say
-            </h2>
-            <p className="text-xl text-secondary-100 max-w-3xl mx-auto leading-relaxed">
-              Don't just take our word for it. Here's what industry leaders have to say
-              about working with ShortForge.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard key={index} {...testimonial} />
-            ))}
-          </div>
-        </div>
-      </section> */}
-
       {/* CTA Section */}
       <section className="relative py-32 bg-forge-black overflow-hidden">
         {/* Dramatic ember glow effect */}
@@ -407,8 +332,9 @@ export default function Home() {
               Ready to <span className="text-gradient-ember">Forge Your Future?</span>
             </h2>
             <p className="text-xl md:text-2xl text-secondary-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Join hundreds of companies already transforming their business with <span className="font-bold"><span className="text-forge-charcoal">Short</span><span className="text-ember-600">Forge</span></span>.
-              Let's discuss how we can help you achieve your goals.
+              You work directly with the engineer who writes the code — no account manager,
+              no handoff to a subcontractor. Tell me what the problem is and I&apos;ll tell you
+              whether I&apos;m the right person to solve it.
             </p>
 
             <motion.div
