@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -139,6 +140,14 @@ export default function HomePage() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr]">
             <Reveal>
+              <Image
+                src="/about/stephen.webp"
+                alt="Stephen Psaradellis"
+                width={1000}
+                height={1250}
+                sizes="88px"
+                className="mb-6 h-[88px] w-[88px] rounded-full border border-line object-cover object-top shadow-card"
+              />
               <SectionHeading eyebrow={homeAbout.eyebrow} title={homeAbout.title} />
               {homeAbout.paragraphs.map((p) => (
                 <p key={p} className="mt-5 max-w-xl leading-relaxed text-ink-soft">

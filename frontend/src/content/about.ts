@@ -7,7 +7,7 @@ export const aboutHero = {
   eyebrow: 'About',
   title: 'ShortForge is one engineer.',
   paragraphs: [
-    "My name is Stephen Psaradellis. I've spent seven years building software that banks and large enterprises run in production: payment APIs, compliance systems, and customer data platforms where being wrong is expensive.",
+    "My name is Stephen Psaradellis. I've spent seven years building software that banks and large enterprises run in production, and I'm currently a contract developer at PepsiCo. Payment APIs, compliance systems, and customer data platforms where being wrong is expensive.",
     "ShortForge is where I do that work for people who aren't banks. Websites and automation for businesses that would never get a call back from an agency, built the same careful way.",
   ],
 };

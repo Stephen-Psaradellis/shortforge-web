@@ -86,9 +86,8 @@ export function Leaflet() {
 
       <p style={{ margin: '8pt 0 10pt', fontSize: '9pt', lineHeight: 1.5 }}>
         I&apos;m a software engineer in Chicago. For seven years I&apos;ve built systems for
-        global banks and, right now, one of the largest food and beverage companies in the
-        country. On the side I build websites for small businesses: fast, simple, and yours
-        outright. No monthly platform bill, and <strong>about $12 a year</strong> to keep
+        global banks, and I&apos;m currently a contract developer at PepsiCo. On the side I
+        build websites for small businesses: fast, simple, and yours outright. No monthly platform bill, and <strong>about $12 a year</strong> to keep
         online.
       </p>
 

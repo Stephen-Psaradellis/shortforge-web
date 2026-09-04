@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
@@ -22,19 +23,34 @@ export default function AboutPage() {
       {/* Hero */}
       <Section size="hero">
         <Container>
-          <SectionHeading as="h1" eyebrow={aboutHero.eyebrow} title={aboutHero.title} />
-          {aboutHero.paragraphs.map((p) => (
-            <p key={p} className="mt-6 max-w-3xl text-lg leading-relaxed text-ink-soft sm:text-xl">
-              {p}
-            </p>
-          ))}
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Button href="/websites" size="lg" icon={ArrowRight}>
-              Websites for small businesses
-            </Button>
-            <Button href="/contact" size="lg" variant="secondary">
-              Get in touch
-            </Button>
+          <div className="grid items-start gap-12 lg:grid-cols-[1.35fr_1fr]">
+            <div>
+              <SectionHeading as="h1" eyebrow={aboutHero.eyebrow} title={aboutHero.title} />
+              {aboutHero.paragraphs.map((p) => (
+                <p key={p} className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft sm:text-xl">
+                  {p}
+                </p>
+              ))}
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Button href="/websites" size="lg" icon={ArrowRight}>
+                  Websites for small businesses
+                </Button>
+                <Button href="/contact" size="lg" variant="secondary">
+                  Get in touch
+                </Button>
+              </div>
+            </div>
+            <Reveal delay={0.1}>
+              <Image
+                src="/about/stephen.webp"
+                alt="Stephen Psaradellis"
+                width={1000}
+                height={1250}
+                priority
+                sizes="(min-width: 1024px) 380px, (min-width: 640px) 60vw, 100vw"
+                className="h-auto w-full max-w-[320px] rounded-xl border border-line object-cover shadow-card lg:max-w-none"
+              />
+            </Reveal>
           </div>
         </Container>
       </Section>
