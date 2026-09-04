@@ -14,6 +14,7 @@ form.
 - Fraunces (display) and Inter (body) via `next/font`
 - `motion` for one subtle scroll-in effect, honoring reduced motion
 - Resend for contact form delivery
+- Vercel Analytics (cookieless) for page-view counts
 - Hosted on Vercel, root directory `frontend`, Node 22
 
 ## Where things live

@@ -5,7 +5,8 @@ export const privacy = {
     {
       heading: 'What this site collects',
       body: [
-        'Nothing, unless you send the contact form. There are no analytics, no advertising pixels, and no cookies set by this site.',
+        'Page views, and nothing else unless you send the contact form. There are no advertising pixels and this site sets no cookies.',
+        'Page views are counted with Vercel Analytics, which is cookieless. Nothing is stored on your device and nothing follows you to other sites. What I see is totals, like how many people opened the pricing page last week, not who any of them are.',
         'If you send the contact form, the fields you fill in (name, email, phone and business if you add them, what you need, and your message) are emailed to me. The email is sent through Resend, a transactional email service, and lands in my inbox. Your IP address is used only to stop the form being spammed and is not stored.',
       ],
     },
