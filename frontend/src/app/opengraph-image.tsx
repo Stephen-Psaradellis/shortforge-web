@@ -78,7 +78,7 @@ export default async function OpenGraphImage() {
         >
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             <div>{SITE.tagline}</div>
-            <div>Chicago area. From $750, about $12 a year to run.</div>
+            <div>Chicago area. From $1,200, about $12 a year to run.</div>
           </div>
           <div style={{ color: '#b8562a', fontWeight: 600 }}>shortforge.dev</div>
         </div>

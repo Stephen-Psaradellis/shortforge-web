@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Mail } from 'lucide-react';
+import { ArrowRight, ChevronDown, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { PriceList } from '@/components/ui/PriceList';
@@ -13,6 +13,8 @@ import { FAQ } from '@/components/sections/FAQ';
 import { FeatureGrid } from '@/components/sections/FeatureGrid';
 import { PricingCard } from '@/components/sections/PricingCard';
 import { ProofBand } from '@/components/sections/ProofBand';
+import { PullQuote } from '@/components/sections/PullQuote';
+import { StatBand } from '@/components/sections/StatBand';
 import { Steps } from '@/components/sections/Steps';
 import { pageMetadata } from '@/lib/metadata';
 import { SITE, mailto } from '@/content/site';
@@ -21,6 +23,7 @@ import {
   aiAddons,
   aiBox,
   comparison,
+  costStats,
   faqs,
   included,
   oneThing,
@@ -31,7 +34,9 @@ import {
   paymentNote,
   pricingLede,
   proof,
+  testimonial,
   steps,
+  vendorNote,
   websitesCta,
   websitesHero,
 } from '@/content/websites';
@@ -39,7 +44,7 @@ import {
 export const metadata: Metadata = pageMetadata({
   title: 'Small business websites in the Chicago area',
   description:
-    'Hand-built websites for small businesses around Chicago. You own the domain, the hosting, and the code. Sites from $750, about $12 a year to keep online.',
+    'Hand-built websites for small businesses around Chicago. You own the domain, the hosting, and the code. Sites from $1,200, about $12 a year to keep online.',
   path: '/websites',
 });
 
@@ -56,10 +61,6 @@ export default function WebsitesPage() {
             lede={websitesHero.lede}
             className="max-w-3xl"
           />
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
-            No monthly platform bill. No template. About{' '}
-            <strong className="font-semibold text-ink">$12 a year</strong> to keep online.
-          </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Button href="#pricing" size="lg" icon={ArrowRight}>
               See what it costs
@@ -88,6 +89,9 @@ export default function WebsitesPage() {
         </Container>
       </Section>
 
+      {/* The cost contrast, in numbers, before any prose repeats it */}
+      <StatBand items={costStats} note={websitesHero.note} />
+
       {/* Proof */}
       <ProofBand
         tone="white"
@@ -98,6 +102,9 @@ export default function WebsitesPage() {
         images={proof.images}
         link={{ label: 'Have a look at the live site', href: SITE.proofUrl }}
       />
+
+      {/* Client quote. Renders only once there is a real one. */}
+      <PullQuote testimonial={testimonial} />
 
       {/* Included */}
       <Section>
@@ -129,6 +136,7 @@ export default function WebsitesPage() {
             ))}
           </div>
           <p className="mt-7 max-w-2xl text-ink-mute">{paymentNote}</p>
+          <p className="mt-2 max-w-2xl text-ink-mute">{vendorNote}</p>
         </Container>
       </Section>
 
@@ -138,14 +146,27 @@ export default function WebsitesPage() {
           <Reveal>
             <SectionHeading title="After it's live" lede={ongoingLede} />
           </Reveal>
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <div className="mt-10 grid gap-x-10 sm:grid-cols-3 sm:gap-x-12">
             {ongoing.map((o, i) => (
-              <Reveal key={o.name} delay={i * 0.06}>
-                <div className="h-full rounded-xl border border-line bg-white p-6 shadow-card">
-                  <h3 className="text-lg font-semibold">{o.name}</h3>
-                  <p className="display tnum mt-2 text-3xl font-semibold">{o.price}</p>
-                  <p className="mt-3 leading-relaxed text-ink-soft">{o.body}</p>
-                </div>
+              <Reveal
+                key={o.name}
+                delay={i * 0.06}
+                className={`border-t pt-6 ${
+                  o.featured ? 'border-copper' : 'border-line'
+                } ${i > 0 ? 'mt-10 sm:mt-0' : ''}`}
+              >
+                <h3 className="text-lg font-semibold">{o.name}</h3>
+                <p
+                  className={`display tnum mt-2 text-3xl font-semibold ${
+                    o.featured ? 'text-copper' : ''
+                  }`}
+                >
+                  {o.price}
+                </p>
+                {o.featured && (
+                  <p className="mt-2 text-sm font-semibold text-copper">First year included</p>
+                )}
+                <p className="mt-3 leading-relaxed text-ink-soft">{o.body}</p>
               </Reveal>
             ))}
           </div>
@@ -157,8 +178,22 @@ export default function WebsitesPage() {
       <Section tone="white" bordered>
         <Container>
           <Reveal>
-            <SectionHeading title="Add-ons" />
-            <PriceList items={addons} className="mt-10" />
+            {/* Detail for someone already sold, not a selling surface. Folded away by default. */}
+            <details className="group max-w-2xl">
+              <summary className="flex cursor-pointer items-center justify-between gap-4 border-b border-line pb-4">
+                <span className="display-sm text-2xl font-semibold">Add-ons</span>
+                <span className="flex shrink-0 items-center gap-2 text-sm font-semibold text-copper">
+                  <span className="group-open:hidden">See the list</span>
+                  <span className="hidden group-open:inline">Hide</span>
+                  <ChevronDown
+                    size={18}
+                    className="transition-transform group-open:rotate-180"
+                    aria-hidden
+                  />
+                </span>
+              </summary>
+              <PriceList items={addons} className="mt-6" />
+            </details>
           </Reveal>
           <Reveal>
             <div className="mt-14 rounded-xl border border-line bg-paper p-7 sm:p-9">

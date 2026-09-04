@@ -11,6 +11,8 @@ import { FAQ } from '@/components/sections/FAQ';
 import { OfferCards } from '@/components/sections/OfferCards';
 import { PricingCard } from '@/components/sections/PricingCard';
 import { ProofBand } from '@/components/sections/ProofBand';
+import { PullQuote } from '@/components/sections/PullQuote';
+import { StatBand } from '@/components/sections/StatBand';
 import { Steps } from '@/components/sections/Steps';
 import { LogoMark } from '@/components/brand/LogoMark';
 import {
@@ -20,9 +22,11 @@ import {
   homeHero,
   homePricing,
   homeProof,
+  homeStats,
   homeSteps,
   offers,
 } from '@/content/home';
+import { testimonial } from '@/content/websites';
 import { SITE } from '@/content/site';
 import { pageMetadata } from '@/lib/metadata';
 
@@ -71,8 +75,14 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      {/* The $12-vs-$300 contrast, stated in numbers before any prose repeats it */}
+      <StatBand items={homeStats.items} note={homeStats.note} />
+
       {/* Proof */}
       <ProofBand {...homeProof} />
+
+      {/* Client quote. Renders only once there is a real one. */}
+      <PullQuote testimonial={testimonial} />
 
       {/* Offers */}
       <Section>
@@ -105,7 +115,7 @@ export default function HomePage() {
               <Reveal key={pkg.name} delay={i * 0.06}>
                 <PricingCard
                   name={pkg.name}
-                  price={pkg.standard}
+                  price={pkg.price}
                   tagline={pkg.tagline}
                   turnaround={pkg.turnaround}
                   features={pkg.features}
@@ -142,15 +152,13 @@ export default function HomePage() {
                 {homeAbout.link.label} <ArrowRight size={18} aria-hidden />
               </Link>
             </Reveal>
-            <ul className="space-y-5">
+            <ul className="divide-y divide-line border-y border-line">
               {homeAbout.values.map((v, i) => (
-                <Reveal as="li" key={v.title} delay={i * 0.06}>
-                  <div className="flex gap-4 rounded-xl border border-line bg-white p-6 shadow-card">
-                    <v.icon size={24} strokeWidth={1.75} className="mt-0.5 shrink-0 text-copper" aria-hidden />
-                    <div>
-                      <h3 className="font-semibold">{v.title}</h3>
-                      <p className="mt-1.5 leading-relaxed text-ink-soft">{v.body}</p>
-                    </div>
+                <Reveal as="li" key={v.title} delay={i * 0.06} className="flex gap-4 py-7 first:pt-0 last:pb-0">
+                  <v.icon size={24} strokeWidth={1.75} className="mt-0.5 shrink-0 text-copper" aria-hidden />
+                  <div>
+                    <h3 className="font-semibold">{v.title}</h3>
+                    <p className="mt-1.5 leading-relaxed text-ink-soft">{v.body}</p>
                   </div>
                 </Reveal>
               ))}

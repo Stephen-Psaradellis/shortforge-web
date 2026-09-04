@@ -1,13 +1,18 @@
-import { faqs, packages, proof, steps } from './websites';
+import { costStats, faqs, packages, proof, steps } from './websites';
 import { values } from './about';
 
 export const homeHero = {
   eyebrow: 'Websites and automation for small businesses',
-  title: 'A website you own, built by hand.',
-  lede: "I'm Stephen Psaradellis, a software engineer in the Chicago suburbs. I build fast, simple websites that live in your own accounts and cost about $12 a year to keep online. When a phone that never stops ringing is the real problem, I build the automation for that too. Only where it pays.",
+  title: 'Your website should cost $12 a year.',
+  lede: "Not $300 to Squarespace, every year, for a template you can never take with you. I build small-business sites by hand and set them up in accounts with your name on them: the domain, the hosting, the code. You own it outright, and the domain is the only bill.",
   primary: { label: 'Book a 20-minute call', href: '/contact' },
   secondary: { label: 'See pricing', href: '/websites#pricing' },
   recent: { label: 'Most recently:', name: 'chicagostreetmarkets.com', href: '/work/chicago-street-markets' },
+};
+
+export const homeStats = {
+  items: costStats,
+  note: 'Hosting is free at the size a small business needs, on an account that belongs to you.',
 };
 
 export const homeProof = {
@@ -16,7 +21,7 @@ export const homeProof = {
   body: proof.body,
   facts: [
     'Nine pages, three markets, a full event calendar',
-    'Loads in about a second, even on market wifi',
+    'Loads in about a second on a phone',
     "About $12 a year to run, entirely in the owner's accounts",
   ],
   images: proof.images,
@@ -25,13 +30,13 @@ export const homeProof = {
 
 export const offers = {
   eyebrow: 'Two things I do',
-  title: 'Websites first. Automation when it earns its keep.',
+  title: 'Websites first. Automation if the phone is the problem.',
   items: [
     {
       title: 'Small business websites',
       body: 'A site that does the three things people came for: hours, location, how to reach you. Built by hand, built for phones, and set up in accounts with your name on them.',
       bullets: [
-        'One page from $750, up to six pages from $1,875',
+        'One page from $1,200, up to six pages from $2,800',
         'Ready in two to five weeks',
         'You own the domain, the hosting, and the code',
       ],
@@ -43,7 +48,7 @@ export const offers = {
       bullets: [
         'AI phone agent: $1,200 setup, $150 a month',
         'Bookings or orders wired into your calendar or POS',
-        'I will tell you if you do not need it',
+        'Runs on a number you own. Cancel any time.',
       ],
       link: { label: 'What it does and what it costs', href: '/automation' },
     },
@@ -59,7 +64,7 @@ export const homeSteps = {
 export const homePricing = {
   eyebrow: 'What it costs',
   title: 'Fixed prices, agreed before anything starts.',
-  lede: 'Half up front, half when it goes live. The domain name is bought on your own card so it stays yours.',
+  lede: 'Half up front, half when it goes live. Every build includes the first year of the care plan, and the domain is bought on your own card so it stays yours.',
   packages,
   link: { label: 'Full pricing, add-ons, and care plans', href: '/websites#pricing' },
 };
@@ -91,5 +96,5 @@ export const homeFaq = {
 
 export const homeCta = {
   title: 'Tell me what you sell.',
-  body: "Twenty minutes on the phone and I'll tell you what your site should cost, including if the answer is that you don't need one from me.",
+  body: "Twenty minutes on the phone and you'll have a fixed price and a start date. No deck, no follow-up sequence.",
 };

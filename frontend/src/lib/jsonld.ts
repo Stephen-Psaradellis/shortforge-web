@@ -25,13 +25,13 @@ export function professionalServiceJsonLd() {
       { '@type': 'Place', name: 'Chicago metropolitan area' },
       { '@type': 'Country', name: 'United States' },
     ],
-    priceRange: '$750 - $4,000',
+    priceRange: '$1,200 - $5,000+',
     makesOffer: [
       ...packages.map((p) => ({
         '@type': 'Offer',
         name: `${p.name} website`,
         description: p.tagline,
-        price: dollars(p.standard),
+        price: dollars(p.price),
         priceCurrency: 'USD',
         url: `${SITE.url}/websites#pricing`,
       })),

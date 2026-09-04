@@ -2,7 +2,7 @@ export const SITE = {
   name: 'ShortForge',
   tagline: 'Websites and automation for small businesses',
   description:
-    'Hand-built websites you own outright, and automation only where it pays. Stephen Psaradellis, a software engineer in the Chicago area. Sites from $750, about $12 a year to keep online.',
+    'Hand-built websites you own outright, and automation where the phone is the problem. Stephen Psaradellis, a software engineer in the Chicago area. Sites from $1,200, about $12 a year to keep online.',
   url: 'https://shortforge.dev',
   owner: 'Stephen Psaradellis',
   email: 's.n.psaradellis@gmail.com',

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button';
 type PricingCardProps = {
   name: string;
   price: string;
-  standard?: string;
+  vendorPrice?: string;
   tagline: string;
   turnaround: string;
   features: string[];
@@ -16,7 +16,7 @@ type PricingCardProps = {
 export function PricingCard({
   name,
   price,
-  standard,
+  vendorPrice,
   tagline,
   turnaround,
   features,
@@ -39,11 +39,15 @@ export function PricingCard({
       )}
       <h3 className="display-sm text-2xl font-semibold">{name}</h3>
       <p className="mt-1.5 text-ink-mute">{tagline}</p>
-      <div className="mt-6 flex items-baseline gap-2.5">
+      <div className="mt-6">
         <span className="display tnum text-4xl font-semibold">{price}</span>
-        {standard && <span className="tnum text-sm text-ink-mute line-through">{standard}</span>}
       </div>
       <p className="mt-1.5 text-sm text-ink-mute">{turnaround}</p>
+      {vendorPrice && (
+        <p className="mt-1 text-sm text-ink-mute">
+          <span className="tnum">{vendorPrice}</span> at the market vendor rate
+        </p>
+      )}
       <ul className="mt-7 flex-1 space-y-2.5">
         {features.map((f) => (
           <li key={f} className="flex gap-2.5 text-ink-soft">

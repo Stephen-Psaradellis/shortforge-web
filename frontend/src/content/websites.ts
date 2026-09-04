@@ -5,7 +5,7 @@ export type Feature = { icon: LucideIcon; title: string; body: string };
 export type Package = {
   name: string;
   price: string;
-  standard: string;
+  vendorPrice: string;
   tagline: string;
   turnaround: string;
   features: string[];
@@ -14,13 +14,21 @@ export type Package = {
 export type Faq = { q: string; a: string };
 export type PriceRow = readonly [label: string, price: string];
 export type Step = { n: string; title: string; body: string };
+export type Stat = { value: string; label: string };
 
 export const websitesHero = {
-  eyebrow: 'For small businesses',
-  title: 'A website you own, built by hand.',
-  lede: "I'm Stephen, a software engineer in Chicago. For seven years I've built systems for global banks and, right now, one of the largest food and beverage companies in the country. On the side I build websites for small businesses: fast, simple, and yours outright.",
-  note: 'No monthly platform bill. No template. About $12 a year to keep online.',
+  eyebrow: 'Small business websites',
+  title: 'Three packages. Fixed prices. You own all of it.',
+  lede: 'Hand-built, fast, and set up in accounts with your name on them. Pick the size that fits, know the price before anything starts, and keep the whole thing if we ever stop working together.',
+  note: 'No monthly platform bill. About $12 a year for the domain, and that is the whole running cost.',
 };
+
+// The contrast the whole business rests on. Rendered as a stat band, not prose.
+export const costStats: Stat[] = [
+  { value: '$12', label: 'A year to keep your site online. That is the entire bill.' },
+  { value: '$200–300', label: 'A year for Squarespace or Wix, for as long as you stay.' },
+  { value: '100%', label: 'Of the domain, hosting, and code registered in your name.' },
+];
 
 export const proof = {
   eyebrow: 'Recent work',
@@ -50,6 +58,10 @@ export const proof = {
   },
 };
 
+// A real quote from a real client goes here, in their words, with permission.
+// Left null on purpose: PullQuote renders nothing until there is one.
+export const testimonial: { quote: string; name: string; role: string } | null = null;
+
 export const included: Feature[] = [
   {
     icon: Smartphone,
@@ -59,7 +71,7 @@ export const included: Feature[] = [
   {
     icon: Gauge,
     title: 'Loads fast',
-    body: 'Hand-written code, no page builder underneath. Pages open in about a second, even on market wifi.',
+    body: 'Hand-written code, no page builder underneath. Pages open in about a second, even on a weak connection.',
   },
   {
     icon: MapPin,
@@ -85,10 +97,10 @@ export const included: Feature[] = [
 
 export const packages: Package[] = [
   {
-    name: 'Stall',
-    price: '$750',
-    standard: '$875',
-    tagline: 'One page, everything on it.',
+    name: 'One Page',
+    price: '$1,200',
+    vendorPrice: '$1,020',
+    tagline: 'Everything on a single page.',
     turnaround: 'Ready in 2 weeks',
     features: [
       'Single page, built for phones',
@@ -104,16 +116,16 @@ export const packages: Package[] = [
   },
   {
     name: 'Storefront',
-    price: '$1,875',
-    standard: '$2,200',
+    price: '$2,800',
+    vendorPrice: '$2,380',
     tagline: 'A real site with room to grow.',
     turnaround: 'Ready in 4–5 weeks',
     features: [
-      'Everything in Stall',
+      'Everything in One Page',
       'Up to 6 pages',
       'Product, menu, or service pages',
       'Email list signup (Mailchimp)',
-      'Event or market schedule',
+      'Event or seasonal schedule',
       'Visitor analytics',
       'Full search-engine setup per page',
       '3 rounds of changes',
@@ -121,9 +133,9 @@ export const packages: Package[] = [
     featured: true,
   },
   {
-    name: 'Full Market',
-    price: 'from $3,400',
-    standard: 'from $4,000',
+    name: 'Custom Build',
+    price: 'from $5,000',
+    vendorPrice: 'from $4,250',
     tagline: 'Selling online, or moving off something else.',
     turnaround: 'Timeline set with the scope',
     features: [
@@ -140,30 +152,37 @@ export const packages: Package[] = [
 ];
 
 export const pricingLede =
-  'Fixed prices, agreed before anything starts. The prices in bold are the vendor rate, 15% off, for anyone selling at Chicago Street Markets.';
+  'Fixed prices, agreed before anything starts. Every build includes the first year of the care plan.';
+
+export const vendorNote =
+  'Selling at Chicago Street Markets? The vendor rate is 15% off every package.';
 
 export const paymentNote =
-  'Half up front, half when it goes live. Anything under $1,000 is paid up front. The domain name (about $12 a year) is bought on your own card so it stays yours.';
+  'Half up front, half when it goes live. The domain name (about $12 a year) is bought on your own card so it stays yours.';
 
 export const ongoing = [
   {
-    name: 'On your own',
-    price: '$0',
-    body: 'I hand you every login and you never hear from me again unless you want to. Your site, your accounts, no strings. This option exists on purpose.',
+    name: 'Care plan',
+    price: '$45/mo',
+    body: 'Hosting, domain, and certificate watched. Up to 30 minutes of edits a month, rolling up to 90. Backups, and you go to the front of the line when something breaks.',
+    featured: true,
   },
   {
     name: 'Season change',
     price: '$250',
-    body: 'Twice a year I swap your hours, dates, menu, and photos for the new season. For most market businesses this is the only thing you actually need.',
+    body: 'Twice a year I swap your hours, dates, menu, and photos for the new season. If the site only changes when the season does, this is all you need.',
+    featured: false,
   },
   {
-    name: 'Care plan',
-    price: '$45/mo',
-    body: 'Hosting, domain, and certificate watched. Up to 30 minutes of edits a month, rolling up to 90. Backups. You go to the front of the line.',
+    name: 'On your own',
+    price: '$0',
+    body: 'I hand you every login and you never hear from me again. Your site, your accounts, no strings.',
+    featured: false,
   },
 ];
 
-export const ongoingLede = 'Three ways to go. Nothing renews on its own, and nothing is required.';
+export const ongoingLede =
+  'The first year of the care plan comes with every build. After that, three ways to go, and nothing renews on its own.';
 export const ongoingNote =
   'Anything outside those is $110 an hour, half-hour minimum, quoted before I start.';
 
@@ -188,7 +207,7 @@ export const aiBox = {
   title: 'An AI agent that answers for you',
   body: [
     "This is the other half of what I do. A voice agent picks up when you can't, answers the questions you get asked forty times a week, takes an order or a booking, and puts it straight on your calendar.",
-    "Worth it if you cater, take custom orders, or lose calls while your hands are full. Not worth it otherwise, and I'll say so.",
+    'Worth it if you cater, take custom orders, or lose calls while your hands are full.',
   ],
   link: { label: 'How the automation work is scoped', href: '/automation' },
 };
@@ -240,7 +259,7 @@ export const faqs: Faq[] = [
   },
   {
     q: 'What if I need something changed later?',
-    a: 'Small edits are $110 an hour with a half-hour minimum, or free within the care plan. Most people find the $250 season change is all they need.',
+    a: 'The first year of the care plan is included, so small edits are covered from the start. After that it is $45 a month to keep it, or $110 an hour with a half-hour minimum if you would rather pay as you go.',
   },
   {
     q: 'Who actually does the work?',
@@ -263,6 +282,6 @@ export const comparison = {
 };
 
 export const websitesCta = {
-  title: 'Tell me what you sell.',
-  body: "Twenty minutes on the phone and I'll tell you what your site should cost, including if the answer is that you don't need one from me.",
+  title: 'Ready when you are.',
+  body: "Tell me what you sell and I'll tell you which package fits and what it costs. Fixed price, agreed before anything starts.",
 };

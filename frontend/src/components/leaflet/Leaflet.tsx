@@ -71,7 +71,7 @@ export function Leaflet() {
               letterSpacing: '-0.01em',
             }}
           >
-            A website you own, built by hand.
+            Your website should cost $12 a year.
           </div>
           <div style={{ fontSize: '9.5pt', marginTop: '3pt', color: SOFT }}>
             {SITE.owner} · Websites for small businesses · Chicago
@@ -171,7 +171,12 @@ export function Leaflet() {
           <div style={{ marginBottom: '11pt' }}>
             {ongoing.map((o) => (
               <div key={o.name} style={row}>
-                <span>{o.name}</span>
+                <span>
+                  {o.name}
+                  {o.featured && (
+                    <span style={{ color: COPPER, fontWeight: 600 }}> &middot; first year included</span>
+                  )}
+                </span>
                 <span style={{ fontWeight: 700 }}>{o.price}</span>
               </div>
             ))}
