@@ -219,3 +219,6 @@ out/
 .env.production.local
 .vercel
 *.tsbuildinfo
+# databases and local screenshots
+*.db
+frontend/.screenshots/
