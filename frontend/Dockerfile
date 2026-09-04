@@ -1,54 +1,27 @@
-# Multi-stage build for production
-FROM node:18-alpine AS builder
-
-# Set environment variables
-ENV NODE_ENV=production
-
-# Set work directory
+# Optional container build. Production runs on Vercel; this exists for
+# docker-compose and anyone who wants to self-host.
+FROM node:22-alpine AS builder
 WORKDIR /app
-
-# Install dependencies (including devDependencies for build)
 COPY package*.json ./
 RUN npm ci && npm cache clean --force
-
-# Copy project
 COPY . .
-
-# Build the application
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
-# Production stage
-FROM node:18-alpine AS runner
-
-# Set environment variables
+FROM node:22-alpine AS runner
 ENV NODE_ENV=production
-
-# Create non-root user
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
-
-# Set work directory
+ENV NEXT_TELEMETRY_DISABLED=1
 WORKDIR /app
-
-# Copy built application from builder stage
+RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.js ./
-
-# Install only production dependencies
-RUN npm ci --only=production && npm cache clean --force
-
-# Change ownership
+COPY --from=builder /app/next.config.ts ./
+COPY --from=builder /app/src/assets ./src/assets
+RUN npm ci --omit=dev && npm cache clean --force
 RUN chown -R nextjs:nodejs /app
 USER nextjs
-
-# Expose port
 EXPOSE 3000
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-    CMD node -e "require('http').get('http://localhost:3000/api/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => process.exit(1))"
-
-# Start the application
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=3 \
+    CMD node -e "require('http').get('http://localhost:3000/', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) }).on('error', () => process.exit(1))"
 CMD ["npm", "start"]

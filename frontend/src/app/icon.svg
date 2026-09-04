@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Keep in sync with src/components/brand/anvil.ts -->
+  <rect width="64" height="64" rx="12" fill="#f7f3ec"/>
+  <g fill="#b8562a" transform="translate(4 6) scale(0.875)">
+    <path d="M24 14 H57 C59.8 14 62 16.2 62 19 V27 C62 28.7 60.7 30 59 30 H24 L6 24.5 C3.3 23.7 3.3 20 6 19.2 L24 14 Z"/>
+    <path d="M31 30 H49 L47 40 H33 Z"/>
+    <path d="M26 40 H54 L60 50 H63 V55.5 H17 V50 H20 Z"/>
+  </g>
+</svg>

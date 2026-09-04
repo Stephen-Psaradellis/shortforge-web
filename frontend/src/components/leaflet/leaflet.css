@@ -1,0 +1,36 @@
+/* Only loaded on /websites/leaflet. On screen the sheet is shown on a gray
+   desk so it can be eyeballed; in print it is the whole page. */
+
+html,
+body {
+  background: #fff !important;
+}
+
+@page {
+  size: Letter;
+  margin: 0.45in 0.5in 0.4in;
+}
+
+@media screen {
+  body {
+    background: #e7e2d9 !important;
+  }
+  .leaflet-sheet {
+    box-sizing: border-box;
+    width: 8.5in;
+    min-height: 11in;
+    margin: 2rem auto;
+    padding: 0.45in 0.5in 0.4in;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(27, 25, 23, 0.06), 0 24px 48px -20px rgba(27, 25, 23, 0.3);
+  }
+}
+
+@media print {
+  .leaflet-sheet {
+    width: auto;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+}

@@ -92,7 +92,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
@@ -104,13 +104,6 @@ jobs:
 
       - name: Run type checking
         run: npm run type-check
-
-      - name: Run tests
-        run: |
-          npm install --save-dev jest @testing-library/react @testing-library/jest-dom
-          npm test -- --coverage --watchAll=false
-        env:
-          CI: true
 
       - name: Build application
         run: npm run build

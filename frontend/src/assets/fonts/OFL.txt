@@ -1,0 +1,2 @@
+Fraunces (c) Undercase Type, Inter (c) Rasmus Andersson. Both under the SIL Open Font License 1.1: https://openfontlicense.org
+Static instances downloaded from Google Fonts for next/og rendering only.

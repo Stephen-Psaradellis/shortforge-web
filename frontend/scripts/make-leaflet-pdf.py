@@ -1,7 +1,7 @@
-"""Render /websites to a PDF leaflet.
+"""Render /websites/leaflet to a PDF.
 
-Single source of truth: the PDF is printed from the live page, so it can never
-drift from what is on the site. Run `npm run dev` first, then:
+Single source of truth: the PDF is printed from the live print route, built from the
+same content as /websites, so it can never drift. Run `npm run dev` first, then:
 
     python scripts/make-leaflet-pdf.py [output.pdf]
 """
@@ -9,7 +9,7 @@ import sys
 import pathlib
 from playwright.sync_api import sync_playwright
 
-URL = "http://localhost:3000/websites"
+URL = "http://localhost:3000/websites/leaflet"
 DEFAULT_OUT = pathlib.Path(__file__).resolve().parents[1] / "public" / "shortforge-websites.pdf"
 
 

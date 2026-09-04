@@ -70,6 +70,9 @@ https://shortforge-backend-production.up.railway.app
 
 ## Frontend Deployment (Vercel)
 
+The site in `frontend/` is a marketing site with one route handler (the contact form). It
+does not call the backend.
+
 ### 1. Connect Repository
 
 1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
@@ -78,46 +81,32 @@ https://shortforge-backend-production.up.railway.app
 4. Configure the project:
    - **Framework Preset**: Next.js
    - **Root Directory**: `frontend`
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `.next`
+   - **Node.js Version**: 22.x
 
 ### 2. Environment Variables
 
 In Vercel project settings → "Environment Variables", add:
 
 ```env
-# API Configuration
-NEXT_PUBLIC_API_URL=https://shortforge-backend-production.up.railway.app
-
-# Stripe (optional)
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
-
-# ElevenLabs (optional)
-NEXT_PUBLIC_ELEVENLABS_AGENT_ID=your_agent_id
-NEXT_PUBLIC_ELEVENLABS_API_KEY=your_elevenlabs_api_key
+RESEND_API_KEY=re_...
+CONTACT_TO_EMAIL=s.n.psaradellis@gmail.com
+# Optional until shortforge.dev is verified in Resend; falls back to onboarding@resend.dev
+CONTACT_FROM_EMAIL=ShortForge <hello@shortforge.dev>
 ```
 
-### 3. Update API Proxy
+Remove any leftover `NEXT_PUBLIC_*` variables from the old app; nothing reads them.
 
-In `frontend/vercel.json`, update the Railway URL:
+### 3. Resend
 
-```json
-{
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "https://shortforge-backend-production.up.railway.app/api/:path*"
-    }
-  ]
-}
-```
+1. Create a Resend account and an API key.
+2. Add `shortforge.dev` as a domain and publish the DNS records it gives you (DKIM, SPF).
+3. Until the domain verifies, mail is sent from `onboarding@resend.dev` and only reaches
+   the address the Resend account was created with.
 
 ### 4. Deploy
 
-Vercel automatically deploys on every push to main. Your app will be available at:
-```
-https://shortforge-web.vercel.app
-```
+Vercel deploys on every push to main. Redirects for the old `/services` and `/work`
+URLs live in `frontend/next.config.ts`.
 
 ---
 
@@ -126,76 +115,17 @@ https://shortforge-web.vercel.app
 ### 1. Update Domain Settings
 
 #### Vercel (Frontend):
-- Go to Project Settings → Domains
-- Add your custom domain (e.g., `shortforge.com`)
-- Update DNS records as instructed
-
-#### Railway (Backend):
-- Railway provides a subdomain, but you can add a custom domain
-- Go to Project Settings → Networking → Custom Domain
-
-### 2. Update CORS Configuration
-
-In `backend/app/core/config.py`, add your production domains:
-
-```python
-BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = [
-    "https://shortforge.com",  # Your production domain
-    "https://shortforge-web.vercel.app",  # Vercel domain
-]
-```
-
-### 3. Database Migration
-
-After deployment, run database migrations on Railway:
-
-```bash
-# Connect to Railway via CLI
-railway connect
-
-# Run migrations (if you have Alembic set up)
-alembic upgrade head
-```
-
-**Important**: Business intelligence data is sourced directly from SupaGent. The frontend calls SupaGent's API endpoints to retrieve personalized business intelligence for agent conversations.
-
-### 4. Stripe Webhooks (Optional)
-
-If using Stripe payments:
-
-1. In Stripe Dashboard → Webhooks
-2. Add endpoint: `https://shortforge-backend-production.up.railway.app/api/v1/payments/webhook`
-3. Copy the webhook secret to Railway environment variables
-
-### 5. Test the Deployment
-
-1. **Frontend**: Visit your Vercel URL
-2. **API**: Check `https://your-backend-url/api/v1/health`
-3. **Database**: Test user registration and login
-4. **Contact Form**: Submit a test inquiry
-
----
-
-## Environment Variables Summary
-
-### Railway (Backend):
 ```env
-DATABASE_URL=postgresql://... # Provided by Railway
-SECRET_KEY=your-secret-key
-STRIPE_SECRET_KEY=sk_live_...
-STRIPE_WEBHOOK_SECRET=whsec_...
-ELEVENLABS_API_KEY=...
-SUPABASE_URL=...
-SUPABASE_KEY=...
+RESEND_API_KEY=re_...
+CONTACT_TO_EMAIL=s.n.psaradellis@gmail.com
+CONTACT_FROM_EMAIL=ShortForge <hello@shortforge.dev>
 ```
 
 ### Vercel (Frontend):
 ```env
-NEXT_PUBLIC_API_URL=https://your-backend-url
-NEXT_PUBLIC_SUPAGENT_URL=https://your-supagent-url
-NEXT_PUBLIC_SUPAGENT_API_KEY=your-supagent-api-key
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
-NEXT_PUBLIC_ELEVENLABS_AGENT_ID=...
+RESEND_API_KEY=re_...
+CONTACT_TO_EMAIL=s.n.psaradellis@gmail.com
+CONTACT_FROM_EMAIL=ShortForge <hello@shortforge.dev>
 ```
 
 ---
