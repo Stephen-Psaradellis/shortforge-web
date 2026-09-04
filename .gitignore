@@ -222,3 +222,6 @@ out/
 # databases and local screenshots
 *.db
 frontend/.screenshots/
+
+# Python template above ignores lib/; the site source needs it
+!frontend/src/lib/
