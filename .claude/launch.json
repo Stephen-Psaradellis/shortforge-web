@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["--prefix", "frontend", "run", "dev"],
       "port": 3000
+    },
+    {
+      "name": "randomchickfarm-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "../clients/random-chick-farm/site", "run", "dev", "--", "-p", "3001"],
+      "port": 3001
     }
   ]
 }

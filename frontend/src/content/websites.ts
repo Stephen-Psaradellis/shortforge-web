@@ -163,7 +163,7 @@ export const paymentNote =
 export const ongoing = [
   {
     name: 'Care plan',
-    price: '$45/mo',
+    price: '$75/mo',
     body: 'Hosting, domain, and certificate watched. Up to 30 minutes of edits a month, rolling up to 90. Backups, and you go to the front of the line when something breaks.',
     featured: true,
   },
@@ -259,7 +259,7 @@ export const faqs: Faq[] = [
   },
   {
     q: 'What if I need something changed later?',
-    a: 'The first year of the care plan is included, so small edits are covered from the start. After that it is $45 a month to keep it, or $110 an hour with a half-hour minimum if you would rather pay as you go.',
+    a: 'The first year of the care plan is included, so small edits are covered from the start. After that it is $75 a month to keep it, or $110 an hour with a half-hour minimum if you would rather pay as you go.',
   },
   {
     q: 'Who actually does the work?',
@@ -278,7 +278,7 @@ export const comparison = {
     ['You can hand it to anyone', 'Hard to move without rebuilding'],
     ['A person who answers the phone', 'A support queue'],
   ] as PriceRow[],
-  note: 'If you need to redesign your own pages every week without calling anyone, a builder is genuinely the better choice. Most small businesses change their site twice a year.',
+  note: 'Said plainly: my way costs more on day one and less every year after. Against a $250-a-year plan you save about $240 a year, so the One Page package pays for itself in roughly five years on running cost alone, and the bigger packages take longer than that. What the money up front actually buys is a faster site you own outright and can hand to anyone. And if you need to redesign your own pages every week without calling anyone, a builder is genuinely the better choice — most small businesses change their site twice a year.',
 };
 
 export const websitesCta = {

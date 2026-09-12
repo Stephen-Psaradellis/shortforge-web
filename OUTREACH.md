@@ -1,5 +1,10 @@
 # Outreach copy
 
+Prices below are copied by hand from `shortforge-documents/templates/pricing.json`,
+which mirrors `frontend/src/content/websites.ts`. When a price changes there, fix it
+here too. The cold emails from `leads.py draft` read `pricing.json` directly and
+never go stale; this file does.
+
 Everything here points at **shortforge.dev/websites** and the one-page PDF at
 **shortforge.dev/shortforge-websites.pdf** (regenerate with
 `python frontend/scripts/make-leaflet-pdf.py` while `npm run dev` is running).
@@ -24,8 +29,8 @@ not read like advertising copy she has been handed.
 > everything is set up in your own name — no monthly Squarespace bill. Ours
 > costs about $12 a year to keep online now.
 >
-> He's giving our vendors 15% off, and sites start at $750. Everything is laid
-> out here: shortforge.dev/websites
+> He gives our vendors 15% off, so a one-page site is $1,020 instead of
+> $1,200. Everything is laid out here: shortforge.dev/vendors
 >
 > Worth a look if your website situation isn't where you want it.
 >
@@ -41,11 +46,13 @@ not read like advertising copy she has been handed.
 >
 > Thanks for getting in touch — glad Michele passed my name along.
 >
-> The short version: a one-page site is $750, a fuller site of up to six pages
-> is $1,875, and larger builds with online ordering start at $3,400. Those are
-> the Chicago Street Markets vendor prices. Whichever one you pick, the domain
-> and the hosting get set up in accounts with your name on them, so after
-> launch you're paying about $12 a year and nothing else.
+> The short version: a one-page site is $1,020, a fuller site of up to six
+> pages is $2,380, and larger builds with online ordering start at $4,250.
+> Those are the Chicago Street Markets vendor prices. Whichever one you pick,
+> the domain and the hosting get set up in accounts with your name on them, so
+> after launch you're paying about $12 a year. The first year of me looking
+> after it is included; after that it's $75 a month if you want me to keep
+> watching it, or nothing if you don't.
 >
 > Easiest next step is twenty minutes on the phone. Tell me what you sell and
 > who buys it, and I'll tell you which package fits — or that you don't need a
@@ -79,8 +86,24 @@ settled and she isn't guessing what to say about price.
 
 ---
 
+## 4. When the markets have closed
+
+For a vendor who replies after the last market of the season (Sep 18-24,
+2026). Use it in place of the middle paragraph of section 2.
+
+> Markets are done for the year, which is honestly the best time to do this.
+> We build over the winter, it's live well before opening day, and because the
+> first year of looking after it is included, your whole first season is
+> covered. Half up front, half when it goes live.
+
+---
+
 ## Notes on using these
 
+- **Michele's note links shortforge.dev/vendors**, which lands on /websites
+  with `?ref=vendors`. A vendor who then fills in the form shows up with
+  `Source: ref=vendors` in the email, so the referral is visible even when
+  they never mention her.
 - **Don't send the PDF cold.** It's an attachment for people who already
   replied, or a handout at a market. The link does the work in an email.
 - **The AI phone agent is not in the vendor pitch on purpose.** Sell it on the
