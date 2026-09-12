@@ -16,7 +16,7 @@ const TAGGED = /(^|; )(ref|utm)=/;
  * Reads ?ref=, utm_*, the referring site's hostname and the landing path into
  * one short string in sessionStorage, on a full page load. The first visit in
  * a tab wins, except that a tagged link (ref or utm) replaces an untagged
- * visit, so opening Michele's link in a tab already on the site still counts.
+ * visit, so opening a referral link in a tab already on the site still counts.
  * No cookie and nothing sent anywhere; the form attaches it only if they
  * submit, and it disappears when the tab closes.
  */
