@@ -15,7 +15,7 @@ export const SITE = {
   leafletPdf: '/shortforge-websites.pdf',
   // Public profiles. Fill in once they exist; empty ones are left out of the JSON-LD.
   // They link back here as shortforge.dev/li (LinkedIn) and shortforge.dev/?ref=gbp (Google).
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/stephen-psaradellis/',
   googleProfile: '',
   nav: [
     { label: 'Websites', href: '/websites' },
