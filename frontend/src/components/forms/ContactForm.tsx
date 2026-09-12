@@ -1,13 +1,15 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { contactSchema, type ContactInput, type Need } from '@/lib/contact-schema';
 import { contactPage } from '@/content/contact';
 import { SITE } from '@/content/site';
+import { SOURCE_KEY } from '@/components/analytics/SourceCapture';
 
 type ContactFormProps = {
   defaultNeed?: Need;
@@ -22,19 +24,26 @@ export function ContactForm({ defaultNeed = 'websites', defaultMessage = '' }: C
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
   const [serverError, setServerError] = useState<string | null>(null);
   const startedAt = useRef<number>(0);
-
-  useEffect(() => {
-    startedAt.current = Date.now();
-  }, []);
+  const router = useRouter();
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { need: defaultNeed, message: defaultMessage, website: '' },
+    defaultValues: { need: defaultNeed, message: defaultMessage, website: '', source: '' },
   });
+
+  useEffect(() => {
+    startedAt.current = Date.now();
+    try {
+      setValue('source', window.sessionStorage.getItem(SOURCE_KEY) ?? '');
+    } catch {
+      // Storage blocked: the email just says "Source: -".
+    }
+  }, [setValue]);
 
   async function onSubmit(values: ContactInput) {
     setStatus('sending');
@@ -51,20 +60,13 @@ export function ContactForm({ defaultNeed = 'websites', defaultMessage = '' }: C
         setStatus('error');
         return;
       }
+      // A real page rather than an in-place message, so Vercel Analytics counts each
+      // /contact/sent view as a sent form (the free plan has no custom events).
       setStatus('sent');
+      router.push('/contact/sent');
     } catch {
       setStatus('error');
     }
-  }
-
-  if (status === 'sent') {
-    return (
-      <div role="status" className="rounded-xl border border-line bg-white p-8 shadow-card">
-        <CheckCircle2 size={32} className="text-ok" aria-hidden />
-        <h2 className="display-sm mt-4 text-2xl font-semibold">{contactPage.success.title}</h2>
-        <p className="mt-2 leading-relaxed text-ink-soft">{contactPage.success.body}</p>
-      </div>
-    );
   }
 
   return (
@@ -183,9 +185,11 @@ export function ContactForm({ defaultNeed = 'websites', defaultMessage = '' }: C
         <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register('website')} />
       </div>
 
+      <input type="hidden" {...register('source')} />
+
       <div className="flex flex-wrap items-center gap-4">
-        <Button type="submit" size="lg" icon={ArrowRight} disabled={status === 'sending'}>
-          {status === 'sending' ? 'Sending…' : 'Send it'}
+        <Button type="submit" size="lg" icon={ArrowRight} disabled={status === 'sending' || status === 'sent'}>
+          {status === 'sending' ? 'Sending…' : status === 'sent' ? 'Sent' : 'Send it'}
         </Button>
         <p className="text-sm text-ink-mute">No mailing list. Just a reply.</p>
       </div>

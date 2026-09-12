@@ -4,6 +4,8 @@ import { aiAddons, packages } from '@/content/websites';
 const dollars = (s: string) => Number(s.replace(/[^0-9]/g, ''));
 
 export function professionalServiceJsonLd() {
+  const profiles: string[] = [SITE.linkedin, SITE.googleProfile];
+  const sameAs = profiles.filter(Boolean);
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
@@ -26,6 +28,7 @@ export function professionalServiceJsonLd() {
       { '@type': 'Country', name: 'United States' },
     ],
     priceRange: '$1,200 - $5,000+',
+    ...(sameAs.length ? { sameAs } : {}),
     makesOffer: [
       ...packages.map((p) => ({
         '@type': 'Offer',

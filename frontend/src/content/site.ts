@@ -13,6 +13,10 @@ export const SITE = {
   proofUrl: 'https://www.chicagostreetmarkets.com/',
   proofName: 'chicagostreetmarkets.com',
   leafletPdf: '/shortforge-websites.pdf',
+  // Public profiles. Fill in once they exist; empty ones are left out of the JSON-LD.
+  // They link back here as shortforge.dev/li (LinkedIn) and shortforge.dev/?ref=gbp (Google).
+  linkedin: '',
+  googleProfile: '',
   nav: [
     { label: 'Websites', href: '/websites' },
     { label: 'Automation', href: '/automation' },

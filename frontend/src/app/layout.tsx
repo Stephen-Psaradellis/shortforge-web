@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Fraunces, Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { MotionProvider } from '@/components/providers/MotionProvider';
+import { SourceCapture } from '@/components/analytics/SourceCapture';
 import { SITE } from '@/content/site';
 import './globals.css';
 
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="font-sans">
         <MotionProvider>{children}</MotionProvider>
         <Analytics />
+        <SourceCapture />
       </body>
     </html>
   );

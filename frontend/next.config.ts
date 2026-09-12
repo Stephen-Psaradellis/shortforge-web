@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
     return [
       { source: '/services', destination: '/automation', permanent: true },
       { source: '/work', destination: '/work/chicago-street-markets', permanent: false },
+      // Human-readable entry links. Each lands with a ?ref= that SourceCapture
+      // remembers, so the contact email says which one brought them.
+      { source: '/vendors', destination: '/websites?ref=vendors', permanent: false }, // Michele's note
+      { source: '/li', destination: '/?ref=linkedin', permanent: false }, // LinkedIn profile link
     ];
   },
 };

@@ -26,6 +26,13 @@ export const contactSchema = z.object({
   website: z.string().max(500).optional(),
   // Set by the form when it mounts; used to drop instant bot submissions.
   startedAt: z.number().int().optional(),
+  // Which link brought them (ref, utm, referring site, landing page), read from
+  // sessionStorage by the form. Never shown to the visitor. Trimmed rather than
+  // rejected: a hidden field that fails validation would block the form silently.
+  source: z
+    .string()
+    .optional()
+    .transform((s) => (s ? s.replace(/[\r\n]+/g, ' ').trim().slice(0, 300) : undefined)),
 });
 
 export type ContactInput = z.input<typeof contactSchema>;

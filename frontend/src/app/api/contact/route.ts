@@ -55,6 +55,8 @@ export async function POST(req: Request) {
     `Phone: ${data.phone || '-'}`,
     `Business: ${data.business || '-'}`,
     `Need: ${NEED_LABELS[data.need]}`,
+    // Keep it in the header block: sf.py parse_eml reads fields up to the first blank line.
+    `Source: ${data.source || '-'}`,
     '',
     data.message,
   ].join('\n');
